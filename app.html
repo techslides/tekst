@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Go Webserver</title>
+   <link rel="stylesheet" href="/css/bootstrap.css">
+   <style> body { padding-top: 60px; padding } /* When using the navbar-top-fixed */
+   </style>
+</head>
+
+<body>
+
+<div>
+   <div class="navbar navbar-inverse navbar-fixed-top"> 
+      <div class="navbar-inner">
+      <div class="container">
+       <ul class="nav">
+        <li><a href="index.html">Index </a></li>
+        <li><a href="/view/">View </a></li>
+        <li><a href="/edit/">Edit </a></li>
+        <li><a href="/error">Error </a></li>
+       </ul>
+      </div><!-- container -->
+      </div><!-- navbar-inner --> 
+   </div><!-- navbar -->
+
+   <div class="container"><!-- MAIN VIEW CONTAINER -->
+      <div class="view-container">
+
+      <h1>{{.Title}} Template</h1>
+      <p>
+         <button class="btn btn-info" onclick="location.href='/edit/{{.Title}}'">Edit {{.Title}}</a></button>
+      </p>
+      <div>{{printf "%s" .Body}}</div>
+
+      </div>
+   </div><!-- MAIN container -->
+
+</div>
+
+<script src="/lib/angular/angular.js"></script>
+</body>
+</html>
+
+
