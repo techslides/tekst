@@ -7,6 +7,7 @@ package main
 import (
    "./code/tekst"
    "encoding/json"
+   "fmt"
    "html/template"
    "io/ioutil"
    "log"
@@ -14,6 +15,18 @@ import (
    "os"
    "regexp"
 )
+
+type Response map[string]interface{}
+
+func (r Response) String() (s string) {
+   b, err := json.Marshal(r)
+   if err != nil {
+      s = ""
+      return
+   }
+   s = string(b)
+   return
+}
 
 type Page struct {
    Title string
@@ -87,25 +100,30 @@ func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
    renderTemplate(w, "app", p)
 }
 
-type test_struct struct {
-    Test string
+func jsonRespond(w http.ResponseWriter, res Response) {
+   w.Header().Set("Content-Type", "application/json")
+   fmt.Fprint(w, res)
+   return
 }
 
-func testHandler(rw http.ResponseWriter, req *http.Request) {
-    body, err := ioutil.ReadAll(req.Body)
-    sw := tekst.Stopwatch {}
-    if err != nil {
-        //panic()
-    }
-    sw.Start()
-    log.Println(string(body))
-    var t test_struct
-    err = json.Unmarshal(body, &t)
-    if err != nil {
-        //panic()
-    }
-    sw.Stop()
-    log.Println(t.Test)
+func testHandler(w http.ResponseWriter, r *http.Request) {
+   body, err := ioutil.ReadAll(r.Body)
+   sw := tekst.Stopwatch {}
+   if err != nil {
+      jsonRespond(w, Response{"success": false, "message": "Could not parse the Body from the Request."})
+   }
+   sw.Start()
+   log.Println(string(body))
+   var t tekst.Task
+   err = json.Unmarshal(body, &t)
+   dur := sw.Stop()
+   if err != nil {
+      jsonRespond(w, Response{"success": false, "message": "Could not parse the JSON message."})
+   }
+   
+   log.Println(t.Data + t.Message + t.Action)
+   jsonRespond(w, Response{"success": true, "message": t.Message, "result": dur})
+   return
 }
 
 func main() {
