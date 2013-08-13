@@ -14,6 +14,8 @@ import (
    "net/http"
    "os"
    "regexp"
+   "sort"
+   "strings"
 )
 
 type Response map[string]interface{}
@@ -110,19 +112,49 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
    body, err := ioutil.ReadAll(r.Body)
    sw := tekst.Stopwatch {}
    if err != nil {
-      jsonRespond(w, Response{"success": false, "message": "Could not parse the Body from the Request."})
+      jsonRespond(w, Response{"status": "fail", "message": "Could not parse the Body from the Request."})
    }
    sw.Start()
    log.Println(string(body))
    var t tekst.Task
    err = json.Unmarshal(body, &t)
-   dur := sw.Stop()
+   sw.Stop()
    if err != nil {
-      jsonRespond(w, Response{"success": false, "message": "Could not parse the JSON message."})
+      jsonRespond(w, Response{"status": "fail", "message": "Could not parse the JSON message."})
    }
    
    log.Println(t.Data + t.Message + t.Action)
-   jsonRespond(w, Response{"success": true, "message": t.Message, "result": dur})
+   jsonRespond(w, Response{"status": "success", "message": t.Message, "result": sw.Dur.String()})
+   return
+}
+
+func restHandler(w http.ResponseWriter, r *http.Request) {
+   sw := tekst.Stopwatch {}
+   var t tekst.Task
+   
+   body, err := ioutil.ReadAll(r.Body)
+   if err != nil {
+      jsonRespond(w, Response{"status": "fail", "message": "Could not parse the Body from the Request."})
+   }
+   
+   log.Println(string(body))
+      
+   sw.Start()
+   err = json.Unmarshal(body, &t)
+   
+   if err != nil {
+      jsonRespond(w, Response{"status": "fail", "message": "Could not parse the JSON message."})
+   }
+   
+   arr := strings.Split(t.Data, " ")
+   sort.Strings(arr)
+   for x := range arr { 
+      t.Result = t.Result + arr[x] + " " 
+      log.Println(arr[x])
+   } 
+   t.Message = sw.Stop()
+   log.Println(t.Data + t.Message + t.Action)
+   jsonRespond(w, Response{"status": "success", "data": t.Result, "result": t.Message})
    return
 }
 
@@ -131,10 +163,11 @@ func main() {
    http.HandleFunc("/save/", makeHandler(saveHandler))
    http.HandleFunc("/view/", makeHandler(viewHandler))
    http.HandleFunc("/test", testHandler)
+   http.HandleFunc("/rest", restHandler)
    http.HandleFunc("/", makeHandler(viewHandler))
    http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
    http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
-   http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js"))))
+   http.Handle("/js/",  http.StripPrefix("/js/",  http.FileServer(http.Dir("js"))))
    http.Handle("/lib/", http.StripPrefix("/lib/", http.FileServer(http.Dir("lib"))))
    log.Fatal(http.ListenAndServe(":8000", nil))
 }

@@ -11,7 +11,7 @@ type Stopwatch struct {
 }
 
 func (sw *Stopwatch) Start() {
-   sw.Beginning = time.Now() 
+   sw.Beginning = time.Now()
 }
 
 func (sw *Stopwatch) Stop() string {
