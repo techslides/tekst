@@ -25,7 +25,7 @@ app.run(function ($rootScope, $log) {
 
 // a service
 app.factory('DataService', function() {
-   return { message: "I'm for a service"};
+   return { input: "I'm for a service"};
 })
 
 app.factory('SortService', function($http) {
@@ -73,11 +73,11 @@ function AlphaCtrl($scope, $http, DataService) {
    $http({
          url: "http://localhost:8000/rest",
          method: "POST",
-         data: JSON.stringify({action: action, data: $scope.data.message}),
+         data: JSON.stringify({action: action, data: $scope.data.input}),
          headers: {"Content-Type": "application/json"}
    }).success(function (data, status, headers, config) {
-         $scope.result = data.result; // assignments as promise is resolved
-         $scope.sorted = data.data;
+         $scope.message = data.message; // assignments as promise is resolved
+         $scope.output = data.data; // data json from "data" (payload)
    }).error(function (data, status, headers, config) {
          $scope.status = status + " " + headers;
    });
@@ -87,7 +87,7 @@ function AlphaCtrl($scope, $http, DataService) {
 function BetaCtrl($scope, DataService) {
    $scope.data = DataService;
    $scope.reversedMsg = function () {
-      return $scope.data.message.split("").reverse().join("");
+      return $scope.data.input.split("").reverse().join("");
    }
 }
 

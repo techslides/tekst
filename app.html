@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <title>[[ .Title ]]</title>
+   <title>Tekst App [[ .Title ]]</title>
    <link rel="stylesheet" href="/css/bootstrap.css">
+   <link rel="SHORTCUT ICON" href="/img/favicon.ico"/>
    <style> body { padding-top: 60px; padding } /* When using the navbar-top-fixed */
    </style>
    <script src="/lib/angular/angular.js"></script>
@@ -26,9 +27,9 @@
 
    <script type="text/ng-template" id="alpha.html">
       <div><h1>Alpha Page</h1>
-         <input type="text" ng-model="data.message">
-         <h3>{{sorted}}</h3>
-         <h3>{{result}}</h3>
+         <input type="text" ng-model="data.input">
+         <h3>{{output}}</h3>
+         <h3>{{message}}</h3>
       </div>
    </script>
 
@@ -53,6 +54,7 @@
    <div class="navbar navbar-inverse navbar-fixed-top"> 
       <div class="navbar-inner">
          <div class="container">
+         <a class="brand" href="#">Tekst Project</a>
          <ul class="nav">
             <li><a href="index.html">Index </a></li>
             <li><a href="#/alpha">Alpha </a></li>

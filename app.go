@@ -75,10 +75,19 @@ func jsonRespond(w http.ResponseWriter, res Response) {
 /* 
  * Handlers
  */
-
+ 
+func redirectHandler(path string) func(http.ResponseWriter, *http.Request) { 
+  return func (w http.ResponseWriter, r *http.Request) {
+    http.Redirect(w, r, path, http.StatusMovedPermanently)
+  }
+} 
+ 
 func makeHandler(fn func (http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
    return func(w http.ResponseWriter, r *http.Request) {
       title := r.URL.Path[lenPath:]
+      if title == "" {
+         title = "none"
+      }
       if !titleValidator.MatchString(title) {
          http.NotFound(w, r)
          return
@@ -113,7 +122,7 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
    }
    
    log.Println(t.Data + t.Message + t.Action)
-   jsonRespond(w, Response{"status":"success", "message": t.Message, "result": sw.Dur.String()})
+   jsonRespond(w, Response{"status":"success", "message": t.Message})
    return
 }
 
@@ -123,7 +132,7 @@ func restHandler(w http.ResponseWriter, r *http.Request) {
    
    body, err := ioutil.ReadAll(r.Body)
    if err != nil {
-      jsonRespond(w, Response{"status":"fail", "message":"Could not parse the Body from the Request."})
+      jsonRespond(w, Response{"status":"fail", "error":"Could not parse the Body from the Request."})
       return
    }
    
@@ -133,7 +142,7 @@ func restHandler(w http.ResponseWriter, r *http.Request) {
    err = json.Unmarshal(body, &t)
    
    if err != nil {
-      jsonRespond(w, Response{"status":"fail", "message":"Could not parse the JSON message."})
+      jsonRespond(w, Response{"status":"fail", "error":"Could not parse the JSON message."})
       return
    }
    
@@ -145,7 +154,7 @@ func restHandler(w http.ResponseWriter, r *http.Request) {
    } 
    t.Message = sw.Stop()
    log.Println(t.Data + t.Message + t.Action)
-   jsonRespond(w, Response{"status":"success", "data": t.Result, "result": t.Message})
+   jsonRespond(w, Response{"status":"success", "data": t.Result, "message": t.Message})
    return
 }
 
@@ -153,7 +162,7 @@ func main() {
    http.HandleFunc("/test", testHandler)
    http.HandleFunc("/rest", restHandler)
    http.HandleFunc("/view/", makeHandler(viewHandler))   
-   http.HandleFunc("/", makeHandler(viewHandler))
+   http.HandleFunc("/", redirectHandler("/view/index.html"))
    http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
    http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
    http.Handle("/js/",  http.StripPrefix("/js/",  http.FileServer(http.Dir("js"))))
