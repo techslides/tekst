@@ -49,10 +49,11 @@ func loadPage(title string) (*Page, error) {
    return &Page{Title: title, Body: body}, nil
 }
 
-var templates = template.Must(template.ParseFiles("app.html"))
+var templates = template.Must(template.New("app.html").Delims("[[","]]").ParseFiles("app.html"))
 
 func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
    err := templates.ExecuteTemplate(w, tmpl, p)
+
    if err != nil {
       http.Error(w, err.Error(), http.StatusInternalServerError)
       return
