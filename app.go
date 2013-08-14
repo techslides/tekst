@@ -18,6 +18,11 @@ import (
    "strings"
 )
 
+const lenPath = len("/view/")
+var templates = template.Must(template.New("app.html").Delims("[[","]]").ParseFiles("app.html"))
+var titleValidator = regexp.MustCompile("[a-zA-Z0-9]+$")
+var cwd, _ = os.Getwd()
+
 type Response map[string]interface{}
 
 func (r Response) String() (s string) {
@@ -30,6 +35,7 @@ func (r Response) String() (s string) {
    return
 }
 
+// Page can be used to load external data to the html page
 type Page struct {
    Title string
    Body []byte
@@ -49,20 +55,26 @@ func loadPage(title string) (*Page, error) {
    return &Page{Title: title, Body: body}, nil
 }
 
-var templates = template.Must(template.New("app.html").Delims("[[","]]").ParseFiles("app.html"))
-
 func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
    err := templates.ExecuteTemplate(w, tmpl, p)
-
    if err != nil {
       http.Error(w, err.Error(), http.StatusInternalServerError)
       return
    }
 }
 
-const lenPath = len("/view/")
-var titleValidator = regexp.MustCompile("[a-zA-Z0-9]+$")
-var cwd, _ = os.Getwd()
+// Writes the Response as json
+// i.e. jsonRespond(w, Response{"status":"fail", "message":"Could not parse the JSON message."})
+func jsonRespond(w http.ResponseWriter, res Response) {
+   w.Header().Set("Content-Type", "application/json")
+   fmt.Fprint(w, res)
+   return
+}
+
+
+/* 
+ * Handlers
+ */
 
 func makeHandler(fn func (http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
    return func(w http.ResponseWriter, r *http.Request) {
@@ -83,17 +95,12 @@ func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
    renderTemplate(w, "app.html", p)
 }
 
-func jsonRespond(w http.ResponseWriter, res Response) {
-   w.Header().Set("Content-Type", "application/json")
-   fmt.Fprint(w, res)
-   return
-}
-
 func testHandler(w http.ResponseWriter, r *http.Request) {
    body, err := ioutil.ReadAll(r.Body)
    sw := tekst.Stopwatch {}
    if err != nil {
       jsonRespond(w, Response{"status":"fail", "message":"Could not parse the Body from the Request."})
+      return
    }
    sw.Start()
    log.Println(string(body))
@@ -102,6 +109,7 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
    sw.Stop()
    if err != nil {
       jsonRespond(w, Response{"status":"fail", "message":"Could not parse the JSON message."})
+      return
    }
    
    log.Println(t.Data + t.Message + t.Action)
@@ -116,6 +124,7 @@ func restHandler(w http.ResponseWriter, r *http.Request) {
    body, err := ioutil.ReadAll(r.Body)
    if err != nil {
       jsonRespond(w, Response{"status":"fail", "message":"Could not parse the Body from the Request."})
+      return
    }
    
    log.Println(string(body))
@@ -125,6 +134,7 @@ func restHandler(w http.ResponseWriter, r *http.Request) {
    
    if err != nil {
       jsonRespond(w, Response{"status":"fail", "message":"Could not parse the JSON message."})
+      return
    }
    
    arr := strings.Split(t.Data, " ")

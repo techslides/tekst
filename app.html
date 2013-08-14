@@ -12,55 +12,55 @@
 <body>
 
 <div ng-app="app">
-    <script type="text/ng-template" id="app.html">
-        <div><h1>Welcome</h1>
-            <p>This is the app front page.</p>
-        </div>
-        <div>
-            <button class="btn btn-primary">primary</button>
-            <button class="btn btn-info">info</button>
-            <button class="btn btn-danger">danger</button>
-            <button class="btn btn-inverse" bs-modal="modal.html">modal</button>
-        <div>
-    </script>
+   <script type="text/ng-template" id="app.html">
+      <div><h1>Welcome</h1>
+         <p>This is the app front page.</p>
+      </div>
+      <div>
+         <button class="btn btn-primary">primary</button>
+         <button class="btn btn-info">info</button>
+         <button class="btn btn-danger">danger</button>
+         <button class="btn btn-inverse" bs-modal="modal.html">modal</button>
+      <div>
+   </script>
 
-    <script type="text/ng-template" id="alpha.html">
-        <div><h1>Alpha Page</h1>
-            <input type="text" ng-model="data.message">
-            <h3>{{data.message}}</h3>
-        </div>
-    </script>
+   <script type="text/ng-template" id="alpha.html">
+      <div><h1>Alpha Page</h1>
+         <input type="text" ng-model="data.message">
+         <h3>{{sorted}}</h3>
+         <h3>{{result}}</h3>
+      </div>
+   </script>
 
-    <script type="text/ng-template" id="beta.html">
-        <div><h1>Beta Page</h1>
-            <input type="text" ng-model="data.message">
-            <h3>{{data.message|reverse}}</h3>
-        </div>
-        <div class="btn" 
-             ng-click="ev = $event" 
-             ng-repeat="item in data.message.split('')">
-             {{$index}}. {{item}} {{ev.pageX}} 
-        </div>
-
-    </script>
+   <script type="text/ng-template" id="beta.html">
+      <div><h1>Beta Page</h1>
+         <input type="text" ng-model="data.message">
+         <h3>{{data.message|reverse}}</h3>
+      </div>
+      <div class="btn" 
+         ng-click="ev = $event" 
+         ng-repeat="item in data.message.split('')">
+            {{$index}}. {{item}} {{ev.pageX}} 
+       </div>
+   </script>
  
-    <script type="text/ng-template" id="delta.html">
-        <div><h1>Delta Page</h1>
-            <p>loads some json</p>
-        </div>
-    </script>
+   <script type="text/ng-template" id="delta.html">
+      <div><h1>Delta Page</h1>
+         <p>loads some json</p>
+      </div>
+   </script>
 
    <div class="navbar navbar-inverse navbar-fixed-top"> 
       <div class="navbar-inner">
-      <div class="container">
-       <ul class="nav">
-        <li><a href="index.html">Index </a></li>
-        <li><a href="#/alpha">Alpha </a></li>
-        <li><a href="#/beta">Beta </a></li>
-        <li><a href="#/delta">Delta </a></li>
-        <li><a href="#/error">Error </a></li>
-       </ul>
-      </div><!-- container -->
+         <div class="container">
+         <ul class="nav">
+            <li><a href="index.html">Index </a></li>
+            <li><a href="#/alpha">Alpha </a></li>
+            <li><a href="#/beta">Beta </a></li>
+            <li><a href="#/delta">Delta </a></li>
+            <li><a href="#/error">Error </a></li>
+         </ul>
+         </div><!-- container -->
       </div><!-- navbar-inner --> 
    </div><!-- navbar -->
 
@@ -71,8 +71,7 @@
       </div>
    </div><!-- MAIN container -->
 
-</div>
-
+</div><!-- ng-app -->
 
 </body>
 </html>

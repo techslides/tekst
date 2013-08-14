@@ -28,6 +28,17 @@ app.factory('DataService', function() {
    return { message: "I'm for a service"};
 })
 
+app.factory('SortService', function($http) {
+   return {
+      getSorted: function(payload) {
+         return $http.get('http://localhost:8000/rest/', payload).then(function(result) {
+            return result.data;
+         });
+      }
+   }
+});
+
+
 // a filter
 app.filter('reverse', function() {
    return function (text) {
@@ -50,12 +61,28 @@ app.directive("error", function ($rootScope) {
 app.controller("AppCtrl", function ($rootScope) {  
    $rootScope.$on("$routeChangeError", function (event, current, previous, rejection) {
       console.log(rejection);
-   })
+   })   
 })
 
-function AlphaCtrl($scope, DataService) {
+function AlphaCtrl($scope, $http, DataService) {
    $scope.data = DataService;
+
+   var action = "SORT";
+   //var data = "This is the example string to sort.";
+
+   $http({
+         url: "http://localhost:8000/rest",
+         method: "POST",
+         data: JSON.stringify({action: action, data: $scope.data.message}),
+         headers: {"Content-Type": "application/json"}
+   }).success(function (data, status, headers, config) {
+         $scope.result = data.result; // assignments as promise is resolved
+         $scope.sorted = data.data;
+   }).error(function (data, status, headers, config) {
+         $scope.status = status + " " + headers;
+   });
 }
+   
 
 function BetaCtrl($scope, DataService) {
    $scope.data = DataService;
