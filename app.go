@@ -18,6 +18,10 @@ import (
    "strings"
 )
 
+/*
+ * Variables and Structs
+ */
+
 const lenPath = len("/view/")
 var templates = template.Must(template.New("app.html").Delims("[[","]]").ParseFiles("app.html"))
 var titleValidator = regexp.MustCompile("[a-zA-Z0-9]+$")
@@ -46,6 +50,10 @@ func (p *Page) save() error {
    return ioutil.WriteFile("data/" + filename, p.Body, 0600)
 }
 
+/* 
+ * Functions and Utils
+ */
+
 func loadPage(title string) (*Page, error) {
    filename := title + ".txt"
    body, err := ioutil.ReadFile("data/" + filename)
@@ -70,7 +78,6 @@ func jsonRespond(w http.ResponseWriter, res Response) {
    fmt.Fprint(w, res)
    return
 }
-
 
 /* 
  * Handlers

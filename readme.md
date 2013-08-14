@@ -4,6 +4,19 @@ A webservice that has a Angular/Javascript frontend that communicates through aj
 
 The services runs on the default :8000 port.
 
+Stack
+* Twitter Bootstrap
+* AngularJS
+* Go Lang
+
+Install and Execute
+-------------------
+* install Go Lang
+* git clone the code
+* go build the source
+* ./tekst
+* point browser to localhost:8000/ 
+
 Request json format
 -------------------
 ```

@@ -25,7 +25,7 @@ app.run(function ($rootScope, $log) {
 
 // a service
 app.factory('DataService', function() {
-   return { input: "I'm for a service"};
+   return { sourcetext: "I'm for a service"};
 })
 
 app.factory('SortService', function($http) {
@@ -73,7 +73,7 @@ function AlphaCtrl($scope, $http, DataService) {
    $http({
          url: "http://localhost:8000/rest",
          method: "POST",
-         data: JSON.stringify({action: action, data: $scope.data.input}),
+         data: JSON.stringify({action: action, data: $scope.data.sourcetext}),
          headers: {"Content-Type": "application/json"}
    }).success(function (data, status, headers, config) {
          $scope.message = data.message; // assignments as promise is resolved

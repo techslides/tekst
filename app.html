@@ -27,20 +27,23 @@
 
    <script type="text/ng-template" id="alpha.html">
       <div><h1>Alpha Page</h1>
-         <input type="text" ng-model="data.input">
-         <h3>{{output}}</h3>
+         <textarea class="span12" ng-model="data.sourcetext" name="sourcetext" rows="10" cols="120"></textarea>
+         <div>
+            <button class="btn btn-primary">Sort By Words</button>
+         <div>
          <h3>{{message}}</h3>
+         <p>{{output}}</p>
       </div>
    </script>
 
    <script type="text/ng-template" id="beta.html">
       <div><h1>Beta Page</h1>
-         <input type="text" ng-model="data.message">
-         <h3>{{data.message|reverse}}</h3>
+         <textarea class="span12" ng-model="data.sourcetext" name="sourcetext" rows="10" cols="120"></textarea>
+         <h3>{{data.sourcetext|reverse}}</h3>
       </div>
       <div class="btn" 
          ng-click="ev = $event" 
-         ng-repeat="item in data.message.split('')">
+         ng-repeat="item in data.sourcetext.split('')">
             {{$index}}. {{item}} {{ev.pageX}} 
        </div>
    </script>
@@ -56,7 +59,7 @@
          <div class="container">
          <a class="brand" href="#">Tekst Project</a>
          <ul class="nav">
-            <li><a href="index.html">Index </a></li>
+            <li><a href="index.html">Reset </a></li>
             <li><a href="#/alpha">Alpha </a></li>
             <li><a href="#/beta">Beta </a></li>
             <li><a href="#/delta">Delta </a></li>
