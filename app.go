@@ -14,8 +14,7 @@ import (
    "net/http"
    "os"
    "regexp"
-   "sort"
-   "strings"
+   "strconv"
 )
 
 /*
@@ -152,13 +151,20 @@ func restHandler(w http.ResponseWriter, r *http.Request) {
       return
    }
    
-   arr := strings.Split(t.Data, " ")
-   sort.Strings(arr)
-   for x := range arr { 
-      t.Result = t.Result + arr[x] + " " 
-      log.Println(arr[x])
-   } 
+   var result string
+   var cnt int
+      
+   switch t.Action{
+      case "SortByWordWithGoSort" : 
+         result, cnt = tekst.SortByWordWithGoSort(t.Data)
+      default : 
+         jsonRespond(w, Response{"status":"fail", "error":"Action command, not a valid action."})
+         return         
+   }
+
+   t.Result = result   
    t.Message = sw.Stop()
+   t.Message += " : " + strconv.Itoa(cnt) + " words"
    log.Println(t.Data + t.Message + t.Action)
    jsonRespond(w, Response{"status":"success", "data": t.Result, "message": t.Message})
    return

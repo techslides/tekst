@@ -1,3 +1,5 @@
+var REST_SERVER_URL = "http://localhost:8000/rest";
+
 var app = angular.module("app", []);
 
 app.config(function ($routeProvider) {
@@ -25,19 +27,8 @@ app.run(function ($rootScope, $log) {
 
 // a service
 app.factory('DataService', function() {
-   return { sourcetext: "I'm for a service"};
+   return { sourcetext: "The quick brown fox jumps over the lazy dog."};
 })
-
-app.factory('SortService', function($http) {
-   return {
-      getSorted: function(payload) {
-         return $http.get('http://localhost:8000/rest/', payload).then(function(result) {
-            return result.data;
-         });
-      }
-   }
-});
-
 
 // a filter
 app.filter('reverse', function() {
@@ -66,24 +57,21 @@ app.controller("AppCtrl", function ($rootScope) {
 
 function AlphaCtrl($scope, $http, DataService) {
    $scope.data = DataService;
-
-   var action = "SORT";
-   //var data = "This is the example string to sort.";
-
-   $http({
-         url: "http://localhost:8000/rest",
+   $scope.goSort = function(act) { 
+      $http({
+         url: REST_SERVER_URL,
          method: "POST",
-         data: JSON.stringify({action: action, data: $scope.data.sourcetext}),
+         data: JSON.stringify({action: act, data: $scope.data.sourcetext}),
          headers: {"Content-Type": "application/json"}
-   }).success(function (data, status, headers, config) {
+      }).success(function (data, status, headers, config) {
          $scope.message = data.message; // assignments as promise is resolved
          $scope.output = data.data; // data json from "data" (payload)
-   }).error(function (data, status, headers, config) {
+      }).error(function (data, status, headers, config) {
          $scope.status = status + " " + headers;
-   });
+      });
+   }
 }
    
-
 function BetaCtrl($scope, DataService) {
    $scope.data = DataService;
    $scope.reversedMsg = function () {
