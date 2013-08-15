@@ -19,7 +19,3 @@ func (sw *Stopwatch) Stop() string {
    sw.Dur = sw.Ending.Sub(sw.Beginning)
    return sw.Dur.String()
 }
-
-func Wait(ms int) {
-   time.Sleep(2 * time.Second)
-}

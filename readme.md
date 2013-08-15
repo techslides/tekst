@@ -11,17 +11,16 @@ Stack
 
 Install and Execute
 -------------------
-* install Go Lang
-* git clone the code
-* go build the source
-* ./tekst
-* point browser to localhost:8000/ 
+* [Install Go Lang](https://github.com/kyledinh/toolkit/wiki/Go)
+* Get source `git clone https://github.com/kyledinh/tekst.git`
+* Build from source `cd tekst; go build`
+* Run webserver `./tekst`
+* Point browser to localhost:8000/ 
 
-Request json format
+Request json payload format
 -------------------
 ```
 { "action":"SORT", "data":"This is an example string to sort." }
-
 ```
 
 Response json format
@@ -33,7 +32,8 @@ Response json format
 Testing
 -------
 ```
-curl -X POST -d "{\"action\" : \"SORT\", \"data\" : \"This is a string to sort.\"}" http://localhost:8000/test
+curl -X POST -d "{\"action\" : \"SORT\", \"data\" : \"This is a string to sort.\"}" /
+      http://localhost:8000/rest
 ```
 
 License

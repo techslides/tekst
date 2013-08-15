@@ -84,9 +84,9 @@ func jsonRespond(w http.ResponseWriter, res Response) {
  */
  
 func redirectHandler(path string) func(http.ResponseWriter, *http.Request) { 
-  return func (w http.ResponseWriter, r *http.Request) {
-    http.Redirect(w, r, path, http.StatusMovedPermanently)
-  }
+   return func (w http.ResponseWriter, r *http.Request) {
+      http.Redirect(w, r, path, http.StatusMovedPermanently)
+   }
 } 
  
 func makeHandler(fn func (http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
@@ -146,8 +146,7 @@ func restHandler(w http.ResponseWriter, r *http.Request) {
    log.Println(string(body))
       
    sw.Start()
-   err = json.Unmarshal(body, &t)
-   
+   err = json.Unmarshal(body, &t)   
    if err != nil {
       jsonRespond(w, Response{"status":"fail", "error":"Could not parse the JSON message."})
       return
