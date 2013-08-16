@@ -20,7 +20,7 @@ Install and Execute
 Request json payload format
 -------------------
 ```
-{ "action":"SORT", "data":["This", "is", "an", "example", "string", "to", "sort."] }
+{ "action":"SELECTION", "data":["This", "is", "an", "example", "string", "to", "sort."] }
 ```
 
 Response json format
@@ -30,10 +30,18 @@ Response json format
      "is", "sort", "string", This"] }
 ```
 
+Action to Sort Mapping
+----------------------
+* "SELECTION" SelectionSort
+* "INSERTION" InsertionSort
+* "NATIVE" Language supplied sort
+* "QUICK" QuickSort
+* "MERGE" MergeSort
+
 Testing
 -------
 ```
-curl -X POST -d "{\"action\" : \"SORT\", \"data\" : \"This is a string to sort.\"}" /
+curl -X POST -d "{\"action\" : \"SELECTION\", \"data\" : [\"This is a string to sort.\" ]}" 
       http://localhost:8000/rest
 ```
 
