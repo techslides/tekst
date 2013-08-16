@@ -80,7 +80,20 @@ function AlphaCtrl($scope, $http, DataService) {
       }).error(function (data, status, headers, config) {
          $scope.status = status + " " + headers;
       });
-   }   
+   }
+   $scope.jsStringSort = function(act) {
+      var sw = new Stopwatch(true);
+      sw.start();
+      $scope.output = selectionSort($scope.data.sourcetext.split(" ")).join(" "); 
+      $scope.message = sw.stop();
+      //alert("Not yet implemented!");
+   }      
+   $scope.jsCharSort = function(act) { 
+      var sw = new Stopwatch(true);
+      sw.start();
+      $scope.output = selectionSort($scope.data.sourcetext.split("")).join(" "); 
+      $scope.message = sw.stop();
+   }
 }
    
 function BetaCtrl($scope, DataService) {

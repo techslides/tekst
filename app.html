@@ -7,6 +7,7 @@
    <style> body { padding-top: 60px; padding } /* When using the navbar-top-fixed */
    </style>
    <script src="/lib/angular/angular.js"></script>
+   <script src="/lib/algorithms.js"></script>
    <script src="/js/main.js"></script>
 </head>
 
@@ -33,8 +34,24 @@
             to sort.</p>
          <textarea class="span12" ng-model="data.sourcetext" name="sourcetext" rows="10" cols="120"></textarea>
          <div>
-            <button class="btn btn-primary" ng-click="goStringSort('SortByWordWithGoSort')">Sort By Words</button>
-            <button class="btn btn-info" ng-click="goCharSort('SortByWordWithGoSort')">Sort By Char</button>
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" width="100%">
+               <tr>
+                  <td> Go Lang 
+                  <div class="pull-right">
+                     <button class="btn btn-primary" ng-click="goStringSort('SortByWordWithGoSort')"><i class="icon-white icon-refresh"></i> Sort By Words</button>
+                     <button class="btn btn-success" ng-click="goCharSort('SortByWordWithGoSort')"><i class="icon-white icon-refresh"></i> Sort By Char</button>
+                  </div>
+                  </td>
+               </tr>
+               <tr>
+                  <td> Javascript 
+                  <div class="pull-right">
+                     <button class="btn btn-primary" ng-click="jsStringSort('SortByWordWithGoSort')"><i class="icon-white icon-refresh"></i> Sort By Words</button>
+                     <button class="btn btn-success" ng-click="jsCharSort('SortByWordWithGoSort')"><i class="icon-white icon-refresh"></i> Sort By Char</button>
+                  </div>
+                  </td>
+               </tr>
+            </table>
          <div>
          <h3>{{message}}</h3>
          <p>{{output}}</p>
