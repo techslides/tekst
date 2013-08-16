@@ -152,8 +152,8 @@ func restHandler(w http.ResponseWriter, r *http.Request) {
    }
       
    switch t.Action{
-      case "SortByWordWithGoSort" : 
-         t.Result, t.Count = tekst.SortByWordWithGoSort(t.Data)
+      case "NATIVE" : 
+         t.Result, t.Count = tekst.NativeSort(t.Data)
       default : 
          jsonRespond(w, Response{ "error":"Action command, not a valid action.", "status":"fail" })
          return         

@@ -11,7 +11,7 @@ func Swap (arr []byte, x, y int) {
    arr[y] = temp 
 } 
 
-func SortByWordWithGoSort(arr []string) (output []string, cnt int) {
+func NativeSort(arr []string) (output []string, cnt int) {
    cnt = len(arr)
    sort.Strings(arr)
    output = arr

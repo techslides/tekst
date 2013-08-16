@@ -25,7 +25,7 @@ app.run(function ($rootScope, $log) {
 
 // a service
 app.factory('DataService', function() {
-   return { sourcetext: "The quick brown fox jumps over the lazy dog."};
+   return { sourcetext: "The quick brown fox jumps over the lazy dog.", criteria: "WORD"};
 })
 
 // a filter
@@ -55,45 +55,36 @@ app.controller("AppCtrl", function ($rootScope) {
 
 function AlphaCtrl($scope, $http, DataService) {
    $scope.data = DataService;
-   $scope.goStringSort = function(act) { 
+   $scope.goSort = function(act) { 
+      console.log("Sort with " + act + " by " + $scope.data.criteria)
+      var delim = ($scope.data.criteria === "CHAR") ? "" : " ";
       $http({
          url: REST_SERVER_URL,
          method: "POST",
-         data: JSON.stringify({action: act, data: $scope.data.sourcetext.split(" ")}),
+         data: JSON.stringify({action: act, data: $scope.data.sourcetext.split(delim)}),
          headers: {"Content-Type": "application/json"}
       }).success(function (data, status, headers, config) {
-         $scope.message = data.message; // assignments as promise is resolved
-         $scope.output = data.data.join(" "); // data json from "data" (payload)
+         if (data.status === "fail") {
+            $scope.message = data.error; // assignments as promise is resolved
+            $scope.output = "";
+            alert("Error with the JSON Response");
+         } else {      
+            $scope.message = data.message; // assignments as promise is resolved
+            $scope.output = data.data.join(" "); // data json from "data" (payload)
+         }
       }).error(function (data, status, headers, config) {
          $scope.status = status + " " + headers;
       });
    } 
-   $scope.goCharSort = function(act) { 
-      $http({
-         url: REST_SERVER_URL,
-         method: "POST",
-         data: JSON.stringify({action: act, data: $scope.data.sourcetext.split("")}),
-         headers: {"Content-Type": "application/json"}
-      }).success(function (data, status, headers, config) {
-         $scope.message = data.message; // assignments as promise is resolved
-         $scope.output = data.data.join(" "); // data json from "data" (payload)
-      }).error(function (data, status, headers, config) {
-         $scope.status = status + " " + headers;
-      });
-   }
-   $scope.jsStringSort = function(act) {
+   $scope.jsSort = function(act) {
+      console.log("Sort with " + act + " by " + $scope.data.criteria)
+      var delim = ($scope.data.criteria === "CHAR") ? "" : " ";
       var sw = new Stopwatch(true);
       sw.start();
-      $scope.output = selectionSort($scope.data.sourcetext.split(" ")).join(" "); 
+      $scope.output = selectionSort($scope.data.sourcetext.split(delim)).join(delim); 
       $scope.message = sw.stop();
       //alert("Not yet implemented!");
    }      
-   $scope.jsCharSort = function(act) { 
-      var sw = new Stopwatch(true);
-      sw.start();
-      $scope.output = selectionSort($scope.data.sourcetext.split("")).join(" "); 
-      $scope.message = sw.stop();
-   }
 }
    
 function BetaCtrl($scope, DataService) {

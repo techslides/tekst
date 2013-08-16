@@ -36,18 +36,35 @@
          <div>
             <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" width="100%">
                <tr>
+                  <td>
+                  <h4>Sort Criteria</h4>
+                  <div class="pull-left">
+                  <form name="myForm" ng-controller="AlphaCtrl">
+                     <label class="radio">
+                        <input type="radio" ng-model="data.criteria" name="criteria" value="WORD">
+                        By words
+                     </label>
+                     <label class="radio">
+                        <input type="radio" ng-model="data.criteria" name="criteria" value="CHAR">
+                        By characters
+                     </label>
+                  </form>                                                                                  
+                  </div>
+                  </td>
+               </tr>            
+               <tr>
                   <td> Go Lang 
                   <div class="pull-right">
-                     <button class="btn btn-primary" ng-click="goStringSort('SortByWordWithGoSort')"><i class="icon-white icon-refresh"></i> Sort By Words</button>
-                     <button class="btn btn-success" ng-click="goCharSort('SortByWordWithGoSort')"><i class="icon-white icon-refresh"></i> Sort By Char</button>
+                     <button class="btn btn-primary" ng-click="goSort('NATIVE')"><i class="icon-white icon-refresh"></i> Native </button>
+                     <button class="btn btn-success" ng-click="goSort('SELECTION')"><i class="icon-white icon-refresh"></i> Selection</button>
                   </div>
                   </td>
                </tr>
                <tr>
                   <td> Javascript 
                   <div class="pull-right">
-                     <button class="btn btn-primary" ng-click="jsStringSort('SortByWordWithGoSort')"><i class="icon-white icon-refresh"></i> Sort By Words</button>
-                     <button class="btn btn-success" ng-click="jsCharSort('SortByWordWithGoSort')"><i class="icon-white icon-refresh"></i> Sort By Char</button>
+                     <button class="btn btn-primary" ng-click="jsSort('SELECTION')"><i class="icon-white icon-refresh"></i> Selection</button>
+                     <button class="btn btn-success" ng-click="jsSort('INSERT')"><i class="icon-white icon-refresh"></i> Insertion</button>
                   </div>
                   </td>
                </tr>
