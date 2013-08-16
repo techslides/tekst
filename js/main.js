@@ -81,9 +81,20 @@ function AlphaCtrl($scope, $http, DataService) {
       var delim = ($scope.data.criteria === "CHAR") ? "" : " ";
       var sw = new Stopwatch(true);
       sw.start();
-      $scope.output = selectionSort($scope.data.sourcetext.split(delim)).join(delim); 
+      if (act === "NATIVE") {
+         $scope.output = $scope.data.sourcetext.split(delim).sort().join(delim); 
+      } else if (act === "SELECTION") {
+         $scope.output = selectionSort($scope.data.sourcetext.split(delim)).join(delim); 
+      } else if (act === "INSERTION") {
+         $scope.output = insertionSort($scope.data.sourcetext.split(delim)).join(delim); 
+      } else {
+        var showalert = true;
+      }
       $scope.message = sw.stop();
-      //alert("Not yet implemented!");
+      if (showalert) { 
+         alert("ERROR: " + act + " Not yet implemented!");
+         $scope.output = ""; 
+      }
    }      
 }
    

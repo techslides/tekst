@@ -16,14 +16,11 @@
 <div ng-app="app">
    <script type="text/ng-template" id="app.html">
       <div><h1>Welcome</h1>
-         <p>This is the app front page.</p>
+         <p>Tekst Project is a Single Page Application that uses AngularJS and a Go Lang backend.
+            Each page serves as a different test. Check out the Alpha page that's an app to measure
+            different sorting algorithms for time performance.
+         </p>
       </div>
-      <div>
-         <button class="btn btn-primary">primary</button>
-         <button class="btn btn-info">info</button>
-         <button class="btn btn-danger">danger</button>
-         <button class="btn btn-inverse" bs-modal="modal.html">modal</button>
-      <div>
    </script>
 
    <script type="text/ng-template" id="alpha.html">
@@ -66,8 +63,10 @@
                <tr>
                   <td> Javascript 
                   <div class="pull-right">
+                     <button class="btn btn-primary" ng-click="jsSort('NATIVE')"><i class="icon-white icon-refresh"></i> Native </button>
                      <button class="btn btn-info" ng-click="jsSort('SELECTION')"><i class="icon-white icon-refresh"></i> Selection</button>
-                     <button class="btn btn-success" ng-click="jsSort('INSERT')"><i class="icon-white icon-refresh"></i> Insertion</button>
+                     <button class="btn btn-success" ng-click="jsSort('INSERTION')"><i class="icon-white icon-refresh"></i> Insertion</button>
+                     <button class="btn btn-warning" ng-click="jsSort('QUICK')"><i class="icon-white icon-refresh"></i> Quick</button>
                   </div>
                   </td>
                </tr>
