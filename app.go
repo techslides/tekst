@@ -15,6 +15,7 @@ import (
    "os"
    "regexp"
    "strconv"
+   "strings"
 )
 
 /*
@@ -114,7 +115,7 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
    body, err := ioutil.ReadAll(r.Body)
    sw := tekst.Stopwatch {}
    if err != nil {
-      jsonRespond(w, Response{"status":"fail", "message":"Could not parse the Body from the Request."})
+      jsonRespond(w, Response{ "message":"Could not parse the Body from the Request.", "status":"fail" })
       return
    }
    sw.Start()
@@ -123,12 +124,12 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
    err = json.Unmarshal(body, &t)
    sw.Stop()
    if err != nil {
-      jsonRespond(w, Response{"status":"fail", "message":"Could not parse the JSON message."})
+      jsonRespond(w, Response{ "message":"Could not parse the JSON message.", "status":"fail" })
       return
    }
    
-   log.Println(t.Data + t.Message + t.Action)
-   jsonRespond(w, Response{"status":"success", "message": t.Message})
+   log.Println(strings.Join(t.Data, " ") + t.Message + t.Action)
+   jsonRespond(w, Response{ "message": t.Message, "status":"success" })
    return
 }
 
@@ -138,35 +139,30 @@ func restHandler(w http.ResponseWriter, r *http.Request) {
    
    body, err := ioutil.ReadAll(r.Body)
    if err != nil {
-      jsonRespond(w, Response{"status":"fail", "error":"Could not parse the Body from the Request."})
+      jsonRespond(w, Response{ "error":"Could not parse the Body from the Request.", "status":"fail" })
       return
-   }
-   
+   }   
    log.Println(string(body))
       
    sw.Start()
    err = json.Unmarshal(body, &t)   
    if err != nil {
-      jsonRespond(w, Response{"status":"fail", "error":"Could not parse the JSON message."})
+      jsonRespond(w, Response{ "error":"Could not parse the JSON message.", "status":"fail" })
       return
    }
-   
-   var result string
-   var cnt int
       
    switch t.Action{
       case "SortByWordWithGoSort" : 
-         result, cnt = tekst.SortByWordWithGoSort(t.Data)
+         t.Result, t.Count = tekst.SortByWordWithGoSort(t.Data)
       default : 
-         jsonRespond(w, Response{"status":"fail", "error":"Action command, not a valid action."})
+         jsonRespond(w, Response{ "error":"Action command, not a valid action.", "status":"fail" })
          return         
    }
-
-   t.Result = result   
+  
    t.Message = sw.Stop()
-   t.Message += " : " + strconv.Itoa(cnt) + " words"
-   log.Println(t.Data + t.Message + t.Action)
-   jsonRespond(w, Response{"status":"success", "data": t.Result, "message": t.Message})
+   t.Message += " : " + strconv.Itoa(t.Count) + " elements"
+   log.Println(strings.Join(t.Data, " ") + t.Message + t.Action)
+   jsonRespond(w, Response{ "data": t.Result, "message": t.Message, "status":"success"})
    return
 }
 

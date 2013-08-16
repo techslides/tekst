@@ -20,13 +20,14 @@ Install and Execute
 Request json payload format
 -------------------
 ```
-{ "action":"SORT", "data":"This is an example string to sort." }
+{ "action":"SORT", "data":["This", "is", "an", "example", "string", "to", "sort."] }
 ```
 
 Response json format
 --------------------
 ```
-{ "status":"success", "message":"30ms", "data":"an example is sort string This" }
+{ "status":"success", "message":"30ms : 6 elements", "data": ["an", "example",
+     "is", "sort", "string", This"] }
 ```
 
 Testing

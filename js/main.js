@@ -3,20 +3,18 @@ var REST_SERVER_URL = "http://localhost:8000/rest";
 var app = angular.module("app", []);
 
 app.config(function ($routeProvider) {
-   $routeProvider.when('/', { templateUrl:"app.html", controller:"AppCtrl" })     
+   $routeProvider.when('/',      { templateUrl:"app.html",   controller:"AppCtrl" })     
                  .when('/alpha', { templateUrl:"alpha.html", controller:"AlphaCtrl" })     
-                 .when('/beta', { templateUrl:"beta.html", controller:"BetaCtrl" })     
-                 .when('/delta', { templateUrl:"delta.html", 
-                                   controller:"DeltaCtrl",
-                                   resolve: {
-                                      loadData: deltaCtrl.loadData,
-                                   } 
+                 .when('/beta',  { templateUrl:"beta.html",  controller:"BetaCtrl" })     
+                 .when('/delta', { templateUrl:"delta.html", controller:"DeltaCtrl",
+                                      resolve: {
+                                         loadData: deltaCtrl.loadData,
+                                      } 
                                  })     
-                 .when('/error', { templateUrl:"delta.html", 
-                                   controller:"DeltaCtrl",
-                                   resolve: {
-                                      makeError: deltaCtrl.makeError,
-                                   } 
+                 .when('/error', { templateUrl:"delta.html", controller:"DeltaCtrl",
+                                      resolve: {
+                                         makeError: deltaCtrl.makeError,
+                                      } 
                                  })     
                  .otherwise( {template: "404 Not Found!"} )     
 })
@@ -57,19 +55,32 @@ app.controller("AppCtrl", function ($rootScope) {
 
 function AlphaCtrl($scope, $http, DataService) {
    $scope.data = DataService;
-   $scope.goSort = function(act) { 
+   $scope.goStringSort = function(act) { 
       $http({
          url: REST_SERVER_URL,
          method: "POST",
-         data: JSON.stringify({action: act, data: $scope.data.sourcetext}),
+         data: JSON.stringify({action: act, data: $scope.data.sourcetext.split(" ")}),
          headers: {"Content-Type": "application/json"}
       }).success(function (data, status, headers, config) {
          $scope.message = data.message; // assignments as promise is resolved
-         $scope.output = data.data; // data json from "data" (payload)
+         $scope.output = data.data.join(" "); // data json from "data" (payload)
       }).error(function (data, status, headers, config) {
          $scope.status = status + " " + headers;
       });
-   }
+   } 
+   $scope.goCharSort = function(act) { 
+      $http({
+         url: REST_SERVER_URL,
+         method: "POST",
+         data: JSON.stringify({action: act, data: $scope.data.sourcetext.split("")}),
+         headers: {"Content-Type": "application/json"}
+      }).success(function (data, status, headers, config) {
+         $scope.message = data.message; // assignments as promise is resolved
+         $scope.output = data.data.join(" "); // data json from "data" (payload)
+      }).error(function (data, status, headers, config) {
+         $scope.status = status + " " + headers;
+      });
+   }   
 }
    
 function BetaCtrl($scope, DataService) {

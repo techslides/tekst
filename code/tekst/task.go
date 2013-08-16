@@ -11,13 +11,14 @@ import(
 
 type Task struct{
    Action string
-   Data string
+   Data []string
+   Result []string    
    Message string
-   Result string    
    Status string
+   Count int
 }
  
 func TaskTest(){
-   t1 := Task{"Data str", "Message str", "Action command","",""}
+   t1 := Task{"Data str", []string{ "input" },[]string{ "output" } ,"Action command","", 2}
    Printf("Task: %s %s %s \n", t1)
 }

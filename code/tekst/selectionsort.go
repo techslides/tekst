@@ -3,7 +3,6 @@ package tekst
 import (
    "log"
    "sort"
-   "strings"
 )
 
 func Swap (arr []byte, x, y int) {
@@ -12,14 +11,11 @@ func Swap (arr []byte, x, y int) {
    arr[y] = temp 
 } 
 
-func SortByWordWithGoSort(input string) (output string, cnt int) {
-   arr := strings.Split(input, " ")
+func SortByWordWithGoSort(arr []string) (output []string, cnt int) {
    cnt = len(arr)
    sort.Strings(arr)
-   for x := range arr { 
-      output += arr[x] + " " 
-      log.Println(arr[x])
-   }
+   output = arr
+   log.Println(output) 
    return  
 }
 
