@@ -80,17 +80,18 @@ function AlphaCtrl($scope, $http, DataService) {
       console.log("Sort with " + act + " by " + $scope.data.criteria)
       var delim = ($scope.data.criteria === "CHAR") ? "" : " ";
       var sw = new Stopwatch(true);
+      var arr = $scope.data.sourcetext.split(delim);
       sw.start();
       if (act === "NATIVE") {
-         $scope.output = $scope.data.sourcetext.split(delim).sort().join(delim); 
+         $scope.output = $scope.data.sourcetext.split(delim).sort().join(" "); 
       } else if (act === "SELECTION") {
-         $scope.output = selectionSort($scope.data.sourcetext.split(delim)).join(delim); 
+         $scope.output = selectionSort(arr).join(" "); 
       } else if (act === "INSERTION") {
-         $scope.output = insertionSort($scope.data.sourcetext.split(delim)).join(delim); 
+         $scope.output = insertionSort(arr).join(" "); 
       } else {
-        var showalert = true;
+         var showalert = true;
       }
-      $scope.message = sw.stop();
+      $scope.message = sw.stop() + "ms : " + arr.length + " elements";
       if (showalert) { 
          alert("ERROR: " + act + " Not yet implemented!");
          $scope.output = ""; 
