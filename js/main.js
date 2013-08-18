@@ -91,7 +91,7 @@ function AlphaCtrl($scope, $http, DataService) {
       } else {
          var showalert = true;
       }
-      $scope.message = sw.stop() + "ms : " + arr.length + " elements";
+      $scope.message = act + " " +sw.stop() + "ms : " + arr.length + " elements";
       if (showalert) { 
          alert("ERROR: " + act + " Not yet implemented!");
          $scope.output = ""; 

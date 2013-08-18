@@ -163,8 +163,7 @@ func restHandler(w http.ResponseWriter, r *http.Request) {
          return         
    }
   
-   t.Message = sw.Stop()
-   t.Message += " : " + strconv.Itoa(t.Count) + " elements"
+   t.Message = t.Action + " " + sw.Stop() + " : " + strconv.Itoa(t.Count) + " elements"
    log.Println(strings.Join(t.Data, " ") + t.Message + t.Action)
    jsonRespond(w, Response{ "data": t.Result, "message": t.Message, "status":"success"})
    return

@@ -19,6 +19,9 @@ Install and Execute
 * Run webserver `./tekst`
 * Point browser to localhost:8000/ 
 
+You may need to set the REST_SERVER_URL variable in js/main.js to your url.
+`var REST_SERVER_URL = "http://localhost:8000/rest";`
+
 Request json payload format
 -------------------
 ```
