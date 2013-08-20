@@ -7,22 +7,31 @@ describe('Algorithms Sorting Functions', function() {
    describe('Selection Sort', function(){
       it('should sort this array', function() {
          var arr = ["v","a","d","e","r"];
-         var out = selectionSort(arr);
- 
-         expect(out[0]).toBe("a");
-         expect(out[1]).toBe("d");
-         expect(out[4]).toBe("v");
+         var ss = selectionSort(arr);
+         var js = arr.sort(); 
+         var n = ss.length;
+
+         for (var i=0; i < n; i++) {
+            expect(ss[i]).toBe(js[i]);
+         } 
+
       });
    });
 
    describe('Insertion Sort', function(){
       it('should sort this array', function() {
          var arr = ["v","a","d","e","r"];
-         var out = insertionSort(arr);
- 
-         expect(out[0]).toBe("a");
-         expect(out[1]).toBe("d");
-         expect(out[4]).toBe("v");
+         var is = insertionSort(arr);
+         var js = arr.sort(); 
+         var n = is.length;
+
+         for (var i=0; i < n; i++) {
+            expect(is[i]).toBe(js[i]);
+         } 
+
+         expect(is[0]).toBe("a");
+         expect(is[1]).toBe("d");
+         expect(is[4]).toBe("v");
       });
    });
 
