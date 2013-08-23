@@ -1,33 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <title>Tekst App [[ .Title ]]</title>
-   <link rel="stylesheet" href="/css/bootstrap.css">
-   <link rel="stylesheet" href="/css/app.css">
-   <link rel="SHORTCUT ICON" href="/img/favicon.ico"/>
-   <style> body { padding-top: 60px; padding } /* When using the navbar-top-fixed */
-   </style>
-   <script src="/lib/angular/angular.js"></script>
-   <script src="/js/algorithms.js"></script>
-   <script src="/js/app.js"></script>
-</head>
-
-<body>
-
-<div ng-app="app">
-   <script type="text/ng-template" id="app_tpl">
-      <div><h1>Welcome</h1>
-         <p>Tekst Project is a Single Page Application that uses AngularJS and a Go Lang backend.
-            Each page serves as a different test. Check out the Alpha page that's an app to measure
-            different sorting algorithms for time performance.
-         </p>
-         <p>This project is open-source and available on 
-         <a href="https://github.com/kyledinh/tekst">Github</a>. 
-         </p>
-      </div>
-   </script>
-
-   <script type="text/ng-template" id="alpha_tpl">
       <div><h1>Alpha Page</h1>
          <p>This page sorts the textarea below with an ajax call to the Go server and uses the Go server's
             sort functions. The time measurement is for the json unmarshalling and sort computing. The source
@@ -82,39 +52,3 @@
          <h3>{{message}}</h3>
          <p>{{output}}</p>
       </div>
-   </script>
- 
-   <script type="text/ng-template" id="delta.html">
-      <div><h1>Delta Page</h1>
-         <p>a page</p>
-      </div>
-   </script>
-
-   <div class="navbar navbar-inverse navbar-fixed-top"> 
-      <div class="navbar-inner">
-         <div class="container">
-         <a class="brand" href="#">Tekst Project</a>
-         <ul class="nav">
-            <li><a href="index.html">Reset </a></li>
-            <li><a href="#/alpha">Alpha </a></li>
-            <li><a href="#/beta">Beta </a></li>
-            <li><a href="#/delta">Delta </a></li>
-            <li><a href="#/error">Error </a></li>
-         </ul>
-         </div><!-- container -->
-      </div><!-- navbar-inner --> 
-   </div><!-- navbar -->
-
-   <div class="container"><!-- MAIN VIEW CONTAINER -->
-      <div class="view-container" ng-controller="AppCtrl">
-         <error></error>
-         <ng-view></ng-view>
-      </div>
-   </div><!-- MAIN container -->
-
-</div><!-- ng-app -->
-
-</body>
-</html>
-
-

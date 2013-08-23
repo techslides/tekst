@@ -175,6 +175,7 @@ func main() {
    http.HandleFunc("/view/", makeHandler(viewHandler))
    http.HandleFunc("/", redirectHandler("/view/app.html"))
    http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
+   http.Handle("/html/", http.StripPrefix("/html/", http.FileServer(http.Dir("html"))))
    http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
    http.Handle("/js/",  http.StripPrefix("/js/",  http.FileServer(http.Dir("js"))))
    http.Handle("/lib/", http.StripPrefix("/lib/", http.FileServer(http.Dir("lib"))))

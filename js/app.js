@@ -3,15 +3,15 @@ var REST_SERVER_URL = "http://localhost:8000/rest";
 var app = angular.module("app", []);
 
 app.config(function ($routeProvider) {
-   $routeProvider.when('/',      { templateUrl:"app.html",   controller:"AppCtrl" })     
-                 .when('/alpha', { templateUrl:"alpha.html", controller:"AlphaCtrl" })     
-                 .when('/beta',  { templateUrl:"beta.html",  controller:"BetaCtrl" })     
-                 .when('/delta', { templateUrl:"delta.html", controller:"DeltaCtrl",
+   $routeProvider.when('/',      { controller:"AppCtrl",   templateUrl:"app_tpl"  })     
+                 .when('/alpha', { controller:"AlphaCtrl", templateUrl:"alpha_tpl" })     
+                 .when('/beta',  { controller:"BetaCtrl",  templateUrl:"/html/beta.tpl" })     
+                 .when('/delta', { controller:"DeltaCtrl", templateUrl:"delta.html",
                                       resolve: {
                                          loadData: deltaCtrl.loadData,
                                       } 
                                  })     
-                 .when('/error', { templateUrl:"delta.html", controller:"DeltaCtrl",
+                 .when('/error', { controller:"DeltaCtrl", templateUrl:"delta.html", 
                                       resolve: {
                                          makeError: deltaCtrl.makeError,
                                       } 
@@ -103,6 +103,18 @@ function BetaCtrl($scope, DataService) {
    $scope.data = DataService;
    $scope.reversedMsg = function () {
       return $scope.data.input.split("").reverse().join("");
+   }
+   $scope.openModal = function(id) {
+      document.getElementById("backdrop").classList.add('modal-backdrop');
+      document.getElementById(id).style.display = "block";
+      document.getElementById(id).classList.add('in');
+      document.getElementById(id).setAttribute("aria-hidden","true");
+   }
+   $scope.closeModal = function(id) { 
+      document.getElementById(id).style.display = "none";
+      document.getElementById(id).classList.remove('in');
+      document.getElementById(id).setAttribute("aria-hidden","false");      
+      document.getElementById("backdrop").classList.remove('modal-backdrop');
    }
 }
 
