@@ -1,5 +1,6 @@
+"use strict";
+
 function Stopwatch(debug) {
-   "use strict";
    this.begin;
    this.end;
    this.dur;

@@ -52,6 +52,23 @@ curl -X POST -d "{\"action\" : \"SELECTION\", \"data\" : [\"This is a string to 
       http://localhost:8000/rest
 ```
 
+Dev Notes
+---------
+Go code unit test
+```
+cd code/tekst
+go test -v
+```
+Javascript unit test
+```
+./scripts/test.sh 
+```
+Build and run
+```
+go build;
+./tekst
+```
+
 License
 -------
 Copyright 2013 Kyle Dinh
