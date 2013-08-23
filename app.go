@@ -82,13 +82,13 @@ func jsonRespond(w http.ResponseWriter, res Response) {
 /* 
  * Handlers
  */
- 
-func redirectHandler(path string) func(http.ResponseWriter, *http.Request) { 
+
+func redirectHandler(path string) func(http.ResponseWriter, *http.Request) {
    return func (w http.ResponseWriter, r *http.Request) {
       http.Redirect(w, r, path, http.StatusMovedPermanently)
    }
-} 
- 
+}
+
 func makeHandler(fn func (http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
    return func(w http.ResponseWriter, r *http.Request) {
       title := r.URL.Path[lenPath:]
@@ -98,7 +98,7 @@ func makeHandler(fn func (http.ResponseWriter, *http.Request, string)) http.Hand
       if !titleValidator.MatchString(title) {
          http.NotFound(w, r)
          return
-      } 
+      }
       fn(w, r, title)
    }
 }
@@ -127,7 +127,7 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
       jsonRespond(w, Response{ "message":"Could not parse the JSON message.", "status":"fail" })
       return
    }
-   
+
    log.Println(strings.Join(t.Data, " ") + t.Message + t.Action)
    jsonRespond(w, Response{ "message": t.Message, "status":"success" })
    return
@@ -136,33 +136,33 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
 func restHandler(w http.ResponseWriter, r *http.Request) {
    sw := tekst.Stopwatch {}
    var t tekst.Task
-   
+
    body, err := ioutil.ReadAll(r.Body)
    if err != nil {
       jsonRespond(w, Response{ "error":"Could not parse the Body from the Request.", "status":"fail" })
       return
-   }   
+   }
    log.Println(string(body))
-      
+
    sw.Start()
-   err = json.Unmarshal(body, &t)   
+   err = json.Unmarshal(body, &t)
    if err != nil {
       jsonRespond(w, Response{ "error":"Could not parse the JSON message.", "status":"fail" })
       return
    }
-      
+
    switch t.Action{
-      case "NATIVE" : 
+      case "NATIVE" :
          t.Result, t.Count = tekst.NativeSort(t.Data)
-      case "SELECTION" : 
+      case "SELECTION" :
          t.Result, t.Count = tekst.SelectionSort(t.Data)
-      case "INSERTION" : 
-         t.Result, t.Count = tekst.InsertionSort(t.Data)                         
-      default : 
+      case "INSERTION" :
+         t.Result, t.Count = tekst.InsertionSort(t.Data)
+      default :
          jsonRespond(w, Response{ "error":"Action command, not a valid action.", "status":"fail" })
-         return         
+         return
    }
-  
+
    t.Message = t.Action + " " + sw.Stop() + " : " + strconv.Itoa(t.Count) + " elements"
    log.Println(strings.Join(t.Data, " ") + t.Message + t.Action)
    jsonRespond(w, Response{ "data": t.Result, "message": t.Message, "status":"success"})
@@ -172,8 +172,8 @@ func restHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
    http.HandleFunc("/test", testHandler)
    http.HandleFunc("/rest", restHandler)
-   http.HandleFunc("/view/", makeHandler(viewHandler))   
-   http.HandleFunc("/", redirectHandler("/view/index.html"))
+   http.HandleFunc("/view/", makeHandler(viewHandler))
+   http.HandleFunc("/", redirectHandler("/view/app.html"))
    http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
    http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
    http.Handle("/js/",  http.StripPrefix("/js/",  http.FileServer(http.Dir("js"))))
