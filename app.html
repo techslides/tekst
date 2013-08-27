@@ -7,8 +7,11 @@
    <link rel="SHORTCUT ICON" href="/img/favicon.ico"/>
    <style> body { padding-top: 60px; padding } /* When using the navbar-top-fixed */
    </style>
-   <script src="/lib/angular/angular.js"></script>
+<!--   <script src="/lib/angular/angular.js"></script> -->
+   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+
    <script src="/js/algorithms.js"></script>
+   <script src="/js/mindsweep.js"></script>
    <script src="/js/app.js"></script>
 </head>
 
@@ -18,8 +21,9 @@
    <script type="text/ng-template" id="app_tpl">
       <div><h1>Welcome</h1>
          <p>Tekst Project is a Single Page Application that uses AngularJS and a Go Lang backend.
-            Each page serves as a different test. Check out the Alpha page that's an app to measure
-            different sorting algorithms for time performance.
+            Each page serves as a different test. Check out the Sort page that's an app to measure
+            different sorting algorithms for time performance. Check out a version of Minesweep at
+            the Mindsweep page.
          </p>
          <p>This project is open-source and available on 
          <a href="https://github.com/kyledinh/tekst">Github</a>. 
@@ -28,7 +32,7 @@
    </script>
 
    <script type="text/ng-template" id="alpha_tpl">
-      <div><h1>Alpha Page</h1>
+      <div><h1>Sorting By Algorithms</h1>
          <p>This page sorts the textarea below with an ajax call to the Go server and uses the Go server's
             sort functions. The time measurement is for the json unmarshalling and sort computing. The source
              is hosted on <a href="https://github.com/kyledinh/tekst">Github</a>.
@@ -84,8 +88,72 @@
       </div>
    </script>
  
-   <script type="text/ng-template" id="delta.html">
-      <div><h1>Delta Page</h1>
+   <script type="text/ng-template" id="beta_tpl">
+   
+      <div class="container"><h1>Modal Example</h1>
+         <p>Example of animation with Angular/Bootstrap without jQuery</p>
+         <textarea class="span12" ng-model="data.sourcetext" name="sourcetext" rows="10" cols="120"></textarea>
+         <p>{{data.sourcetext|reverse}}</p>
+         
+         <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" width="100%">
+            <tr>
+               <td>         
+                  <button class="btn btn-warning" ng-click="openModal('modal')">Open Modal</button>
+               </td>
+            </tr>
+         </table>         
+     
+      </div>
+
+    
+      <!-- MODAL -->
+      <div class="modal hide fade ng-scope in" tabindex="-1" id="modal" style="display: none;" aria-hidden="false">
+         <div class="modal-header">
+            <button type="button" class="close" ng-click="closeModal('modal')" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Modal header</h3>
+         </div>
+         <div class="modal-body">
+            <form>
+            <fieldset>
+            <legend>Legend</legend>
+            <label>Label name</label>
+               <input type="text" placeholder="Type something…" autofocus="autofocus">
+            <span class="help-block">Example block-level help text here.</span>
+            <label class="checkbox">
+               <input type="checkbox"> Check me out
+            </label>
+            <button type="submit" class="btn">Submit</button>
+            </fieldset>
+            </form>
+            <p>{{modal.content}}</p>
+            <br/>
+            <pre>2 + 3 = {{ 2 + 3 }}</pre>
+         </div>
+         <div class="modal-footer">
+            <button class="btn" ng-click="closeModal('modal')">Close</button>
+            <button class="btn btn-primary" ng-click="modal.saved=true;dismiss()">Save changes</button>
+            <button class="btn btn-primary" ng-click="parentController(dismiss)">Parent dismiss</button>
+         </div>
+      </div><!-- Modal -->      
+      
+      <div id="backdrop" class="fade in"></div>   
+   
+   </script> 
+ 
+   <script type="text/ng-template" id="delta_tpl">
+      <div><h1>Mindsweep</h1>
+           <p>This implementation is incomplete, but you can read the mindsweep library at <a href="https://github.com/kyledinh/toolkit/tree/master/mindsweep">Github.</a></p>
+           <p>{{result}}</p>
+           <table>
+              <tr ng-repeat="row in display">
+                 <td ng-repeat="cell in row"><button class="btn" ng-click="play({{cell.x}},{{cell.y}})">{{cell.show}}</button></td>
+              </tr>
+          </table>
+      </div>
+   </script> 
+ 
+   <script type="text/ng-template" id="error_tpl">
+      <div><h1>Error Page</h1>
          <p>a page</p>
       </div>
    </script>
@@ -95,11 +163,9 @@
          <div class="container">
          <a class="brand" href="#">Tekst Project</a>
          <ul class="nav">
-            <li><a href="index.html">Reset </a></li>
-            <li><a href="#/alpha">Alpha </a></li>
-            <li><a href="#/beta">Beta </a></li>
-            <li><a href="#/delta">Delta </a></li>
-            <li><a href="#/error">Error </a></li>
+            <li><a href="#/alpha">Sort </a></li>
+            <li><a href="#/beta">Modal </a></li>
+            <li><a href="#/delta">Mindsweep </a></li>
          </ul>
          </div><!-- container -->
       </div><!-- navbar-inner --> 
@@ -108,7 +174,7 @@
    <div class="container"><!-- MAIN VIEW CONTAINER -->
       <div class="view-container" ng-controller="AppCtrl">
          <error></error>
-         <ng-view></ng-view>
+         <div data-ng-view id="ng-view" ng-animate="{enter: 'view-enter'}"></div>
       </div>
    </div><!-- MAIN container -->
 

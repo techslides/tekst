@@ -5,13 +5,9 @@ var app = angular.module("app", []);
 app.config(function ($routeProvider) {
    $routeProvider.when('/',      { controller:"AppCtrl",   templateUrl:"app_tpl"  })     
                  .when('/alpha', { controller:"AlphaCtrl", templateUrl:"alpha_tpl" })     
-                 .when('/beta',  { controller:"BetaCtrl",  templateUrl:"/html/beta.tpl" })     
-                 .when('/delta', { controller:"DeltaCtrl", templateUrl:"delta.html",
-                                      resolve: {
-                                         loadData: deltaCtrl.loadData,
-                                      } 
-                                 })     
-                 .when('/error', { controller:"DeltaCtrl", templateUrl:"delta.html", 
+                 .when('/beta',  { controller:"BetaCtrl",  templateUrl:"beta_tpl" })     
+                 .when('/delta', { controller:"DeltaCtrl", templateUrl:"delta_tpl" })     
+                 .when('/error', { controller:"DeltaCtrl", templateUrl:"error_tpl", 
                                       resolve: {
                                          makeError: deltaCtrl.makeError,
                                       } 
@@ -119,7 +115,14 @@ function BetaCtrl($scope, DataService) {
 }
 
 var deltaCtrl = app.controller("DeltaCtrl", function ($scope) {
-   $scope.model =  { message: "This is the App" };
+   $scope.result = "OUTPUT";
+   $scope.game = new Game(12,12);
+   $scope.game.start();
+   $scope.display = $scope.game.show();
+   $scope.play = function(x, y) {
+      $scope.result = $scope.game.click(x, y);
+      $scope.display = $scope.game.show();   
+   }   
 });
 
 deltaCtrl.loadData = function ($q, $timeout) {
@@ -127,7 +130,7 @@ deltaCtrl.loadData = function ($q, $timeout) {
    $timeout(function () {
       defer.resolve();
       console.log("loadData");
-   }, 2000);
+   }, 500);
    return defer.promise;
 }
 
