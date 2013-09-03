@@ -133,6 +133,34 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
    return
 }
 
+func gameHandler(w http.ResponseWriter, r *http.Request) {
+   var g tekst.GameData
+
+   body, err := ioutil.ReadAll(r.Body)
+   if err != nil {
+      jsonRespond(w, Response{ "error":"Could not parse the Body from the Request.", "status":"fail" })
+      return
+   }
+   log.Println(string(body))
+
+   err = json.Unmarshal(body, &g)
+   if err != nil {
+      jsonRespond(w, Response{ "error":"Could not parse the JSON message.", "status":"fail" })
+      return
+   }
+
+   switch g.Action{
+      case "SAVEGAME" :   
+         // save json to file system.
+         g.Save()
+      default :
+         jsonRespond(w, Response{ "error":"Action command, not a valid action.", "status":"fail" })
+         return
+   }
+   jsonRespond(w, Response{ "data": g.Name, "message": "saved", "status":"success"})   
+   return
+}
+
 func restHandler(w http.ResponseWriter, r *http.Request) {
    sw := tekst.Stopwatch {}
    var t tekst.Task
@@ -172,6 +200,7 @@ func restHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
    http.HandleFunc("/test", testHandler)
    http.HandleFunc("/rest", restHandler)
+   http.HandleFunc("/game", gameHandler)
    http.HandleFunc("/view/", makeHandler(viewHandler))
    http.HandleFunc("/", redirectHandler("/view/"))
    http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))

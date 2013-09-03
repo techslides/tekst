@@ -1,4 +1,5 @@
 var REST_SERVER_URL = "http://localhost:8000/rest";
+var GAME_SERVER_URL = "http://localhost:8000/game";
 
 var app = angular.module("app", []);
 
@@ -52,7 +53,7 @@ app.controller("AppCtrl", function ($rootScope) {
 function AlphaCtrl($scope, $http, DataService) {
    $scope.data = DataService;
    $scope.goSort = function(act) { 
-      console.log("Sort with " + act + " by " + $scope.data.criteria)
+      console.log("Sort with " + act + " by " + $scope.data.criteria);
       var delim = ($scope.data.criteria === "CHAR") ? "" : " ";
       $http({
          url: REST_SERVER_URL,
@@ -114,7 +115,7 @@ function BetaCtrl($scope, DataService) {
    }
 }
 
-var deltaCtrl = app.controller("DeltaCtrl", function ($scope) {
+var deltaCtrl = app.controller("DeltaCtrl", function ($scope, $http) {
    $scope.result = "OUTPUT";
    $scope.game = new Game(12,12);
    $scope.game.start();
@@ -122,7 +123,28 @@ var deltaCtrl = app.controller("DeltaCtrl", function ($scope) {
    $scope.play = function(x, y) {
       $scope.result = $scope.game.click(x, y);
       $scope.display = $scope.game.show();   
-   }   
+   };
+   $scope.save = function() {
+      console.log("Saving game: " + $scope.game.name);
+      $scope.game.action = "SAVEGAME";
+      var gameData = $scope.game.stringify();
+      $http({
+         url: GAME_SERVER_URL,
+         method: "POST",
+         data: gameData,
+         headers: {"Content-Type": "application/json"}
+      }).success(function (data, status, headers, config) {
+         // TODO better result output for errors
+         if (data.status === "fail") {
+            //
+            alert("Error with the JSON Response");
+         } else {      
+            alert("Game Saved!");
+         }
+      }).error(function (data, status, headers, config) {
+         $scope.result = "ERROR";
+      });   
+   };   
 });
 
 deltaCtrl.loadData = function ($q, $timeout) {
@@ -132,7 +154,7 @@ deltaCtrl.loadData = function ($q, $timeout) {
       console.log("loadData");
    }, 500);
    return defer.promise;
-}
+};
 
 deltaCtrl.makeError = function ($q, $timeout) {
    var defer = $q.defer();
@@ -140,6 +162,6 @@ deltaCtrl.makeError = function ($q, $timeout) {
       defer.reject();
    }, 500);
    return defer.promise;
-}
+};
 
 
