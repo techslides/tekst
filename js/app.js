@@ -85,6 +85,8 @@ function AlphaCtrl($scope, $http, DataService) {
          $scope.output = selectionSort(arr).join(" "); 
       } else if (act === "INSERTION") {
          $scope.output = insertionSort(arr).join(" "); 
+      } else if (act === "QUICK") {
+         $scope.output = quickSort(arr).join(" "); 
       } else {
          var showalert = true;
       }
