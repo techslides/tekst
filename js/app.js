@@ -4,10 +4,10 @@ var GAME_SERVER_URL = "http://localhost:8000/game";
 var app = angular.module("app", []);
 
 app.config(function ($routeProvider) {
-   $routeProvider.when('/',      { controller:"AppCtrl",   templateUrl:"app_tpl"  })     
-                 .when('/alpha', { controller:"AlphaCtrl", templateUrl:"alpha_tpl" })     
-                 .when('/beta',  { controller:"BetaCtrl",  templateUrl:"beta_tpl" })     
-                 .when('/delta', { controller:"DeltaCtrl", templateUrl:"delta_tpl" })     
+   $routeProvider.when('/',      { controller:"AppCtrl",   templateUrl:"app_tpl" })     
+                 .when('/alpha', { controller:"AlphaCtrl", templateUrl:"/html/sort.tpl" })     
+                 .when('/beta',  { controller:"BetaCtrl",  templateUrl:"/html/bootstrap.tpl" })     
+                 .when('/delta', { controller:"DeltaCtrl", templateUrl:"/html/mindsweep.tpl" })     
                  .when('/error', { controller:"DeltaCtrl", templateUrl:"error_tpl", 
                                       resolve: {
                                          makeError: deltaCtrl.makeError,
@@ -103,18 +103,10 @@ function BetaCtrl($scope, DataService) {
    $scope.reversedMsg = function () {
       return $scope.data.input.split("").reverse().join("");
    }
-   $scope.openModal = function(id) {
-      document.getElementById("backdrop").classList.add('modal-backdrop');
-      document.getElementById(id).style.display = "block";
-      document.getElementById(id).classList.add('in');
-      document.getElementById(id).setAttribute("aria-hidden","true");
-   }
-   $scope.closeModal = function(id) { 
-      document.getElementById(id).style.display = "none";
-      document.getElementById(id).classList.remove('in');
-      document.getElementById(id).setAttribute("aria-hidden","false");      
-      document.getElementById("backdrop").classList.remove('modal-backdrop');
-   }
+   $scope.openModal = bootstrap.openModal;
+   $scope.closeModal = bootstrap.closeModal;
+   $scope.toggleAccordion = bootstrap.toggleAccordion;
+ 
 }
 
 var deltaCtrl = app.controller("DeltaCtrl", function ($scope, $http) {
@@ -136,11 +128,9 @@ var deltaCtrl = app.controller("DeltaCtrl", function ($scope, $http) {
          data: gameData,
          headers: {"Content-Type": "application/json"}
       }).success(function (data, status, headers, config) {
-         // TODO better result output for errors
          if (data.status === "fail") {
-            //
-            alert("Error with the JSON Response");
-         } else {      
+            alert(data.error);
+         } else {
             alert("Game Saved!");
          }
       }).error(function (data, status, headers, config) {
@@ -166,4 +156,32 @@ deltaCtrl.makeError = function ($q, $timeout) {
    return defer.promise;
 };
 
+/* 
+ * Bootstrap Utils
+ */
 
+var bootstrap = {};
+
+bootstrap.toggleAccordion = function(id) {
+   console.log("boot style.height: " + document.getElementById(id).style.height);
+   if (document.getElementById(id).style.height === "auto") { 
+      document.getElementById(id).style.height = "0px";
+   } else {
+      document.getElementById(id).style.height = "auto";
+   }
+   document.getElementById(id).classList.add('in');
+}
+
+bootstrap.openModal = function(id) {
+   document.getElementById("backdrop").classList.add('modal-backdrop');
+   document.getElementById(id).style.display = "block";
+   document.getElementById(id).classList.add('in');
+   document.getElementById(id).setAttribute("aria-hidden","true");
+}
+
+bootstrap.closeModal = function(id) { 
+   document.getElementById(id).style.display = "none";
+   document.getElementById(id).classList.remove('in');
+   document.getElementById(id).setAttribute("aria-hidden","false");      
+   document.getElementById("backdrop").classList.remove('modal-backdrop');
+}

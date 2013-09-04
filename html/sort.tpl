@@ -1,4 +1,4 @@
-      <div><h1>Alpha Page</h1>
+      <div><h1>Sorting By Algorithms</h1>
          <p>This page sorts the textarea below with an ajax call to the Go server and uses the Go server's
             sort functions. The time measurement is for the json unmarshalling and sort computing. The source
              is hosted on <a href="https://github.com/kyledinh/tekst">Github</a>.
