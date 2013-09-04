@@ -24,7 +24,7 @@ import (
 
 const lenPath = len("/view/")
 var templates = template.Must(template.New("app.html").Delims("[[","]]").ParseFiles("app.html"))
-var titleValidator = regexp.MustCompile("[a-zA-Z0-9]+$")
+var titleValidator = regexp.MustCompile("^[a-zA-Z0-9]*$")
 var cwd, _ = os.Getwd()
 
 type Response map[string]interface{}
@@ -152,6 +152,10 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
    switch g.Action{
       case "SAVEGAME" :   
          // save json to file system.
+         if !titleValidator.MatchString(g.Name) {
+            jsonRespond(w, Response{ "error":"Invalid filename. Letters and numbers only.", "status":"fail" })
+            return
+         }
          g.Save()
       default :
          jsonRespond(w, Response{ "error":"Action command, not a valid action.", "status":"fail" })
