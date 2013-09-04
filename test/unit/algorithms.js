@@ -35,4 +35,22 @@ describe('Algorithms Sorting Functions', function() {
       });
    });
 
+   describe('Quick Sort', function(){
+      it('should sort this array', function() {
+         var arr = ["v","a","d","e","r"];
+         var qs = quickSort(arr);
+         var js = arr.sort(); 
+         var n = qs.length;
+
+         for (var i=0; i < n; i++) {
+            expect(qs[i]).toBe(js[i]);
+         } 
+         
+         expect(qs[0]).toBe("a");
+         expect(qs[1]).toBe("d");
+         expect(qs[4]).toBe("v");
+
+      });
+   });
+
 });
