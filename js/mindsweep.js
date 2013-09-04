@@ -39,7 +39,8 @@ Tile.prototype.show = function () {
    var out = "=";
    if ((this.status === "CHECKED") && (this.touch > 0)) { out = this.touch; }
    if ((this.status === "CHECKED") && (this.touch === 0)) { out = " "; }
-   if ((this.status === "CLICKED")) { out = "."; }
+   //if ((this.status === "CLICKED")) { out = "."; }
+   if ((this.status === "CLICKED")) { out = this.touch; }
    return out; 
 };
 

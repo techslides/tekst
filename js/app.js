@@ -110,14 +110,30 @@ function BetaCtrl($scope, DataService) {
 }
 
 var deltaCtrl = app.controller("DeltaCtrl", function ($scope, $http) {
+   $scope.toggleAccordion = bootstrap.toggleAccordion; 
    $scope.result = "OUTPUT";
    $scope.game = new Game(12,12);
    $scope.game.start();
    $scope.display = $scope.game.show();
+   
+   $scope.restart = function() {
+      $scope.result = "New Game Started!";
+      $scope.game = new Game(document.getElementById("restart_x").value,
+         document.getElementById("restart_y").value);
+      $scope.game.start(document.getElementById("restart_n").value);
+      $scope.display = $scope.game.show();
+   };
+   
+   $scope.loadgame = function() {
+      alert("Load Game feature is not yet implemented!");
+   };
+   
    $scope.play = function(x, y) {
       $scope.result = $scope.game.click(x, y);
-      $scope.display = $scope.game.show();   
+      $scope.display = $scope.game.show();  
+      if ($scope.result === "BOMB") { alert("YOU HIT A BOMB!!"); }
    };
+  
    $scope.save = function() {
       console.log("Saving game: " + $scope.game.name);
       $scope.game.action = "SAVEGAME";
@@ -164,12 +180,12 @@ var bootstrap = {};
 
 bootstrap.toggleAccordion = function(id) {
    console.log("boot style.height: " + document.getElementById(id).style.height);
+   document.getElementById(id).classList.add('in');   
    if (document.getElementById(id).style.height === "auto") { 
       document.getElementById(id).style.height = "0px";
    } else {
       document.getElementById(id).style.height = "auto";
    }
-   document.getElementById(id).classList.add('in');
 }
 
 bootstrap.openModal = function(id) {
