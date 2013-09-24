@@ -98,3 +98,33 @@ function quickSort(items, left, right) {
    } 
    return items;
 }
+
+function maxRoundedNum(num, max) {
+   var num = Math.floor(num); 
+   if (num > max) { num = max; }
+   return num;
+}
+
+function bucketSort(arr, n) {
+   var items  = new Array();
+   var bucket = new Array();
+   var len = arr.length;
+   var i;
+
+   for (i = 0; i < n; i++) {
+       bucket[i] = new Array();
+   }
+   for (i = 0; i < len; i++) {
+       var y = maxRoundedNum(Math.pow(arr[i], 1/5), n-1);
+       bucket[y].push(arr[i]); 
+   }
+   for (i = 0; i < n; i++) {
+       var buckarr = insertionSort(bucket[i]);
+       console.log("bucket :" + buckarr);
+       items = items.concat(buckarr); 
+   }
+   return items; 
+}
+
+//var test_numbers = [112,1,223,3234,453,67,345,24554,3423,567675,231,3134,453,88,0,5,234,23,34234654,5456,2342,234];
+
