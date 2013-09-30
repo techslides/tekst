@@ -7,6 +7,11 @@
          </p>
          
          <textarea class="span12" ng-model="data.sourcetext" name="sourcetext" rows="10" cols="120"></textarea>
+
+         <h3>{{message}}</h3>
+         <p>{{output}}</p>
+
+
          <div>
             <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" width="100%">
                <tr>
@@ -27,18 +32,17 @@
                   </td>
                </tr>            
                <tr>
-                  <td> Go Lang 
+                  <td> Go Lang (sends AJAX call to a Go Server) 
                   <div class="pull-right">
                      <button class="btn btn-primary" ng-click="goSort('NATIVE')"><i class="icon-white icon-refresh"></i> Native </button>
                      <button class="btn btn-info" ng-click="goSort('SELECTION')"><i class="icon-white icon-refresh"></i> Selection</button>
                      <button class="btn btn-success" ng-click="goSort('INSERTION')"><i class="icon-white icon-refresh"></i> Insertion</button>
                      <button class="btn btn-warning" ng-click="goSort('QUICK')"><i class="icon-white icon-refresh"></i> Quick</button>
-
                   </div>
                   </td>
                </tr>
                <tr>
-                  <td> Javascript 
+                  <td> Javascript (processes the task locally) 
                   <div class="pull-right">
                      <button class="btn btn-primary" ng-click="jsSort('NATIVE')"><i class="icon-white icon-refresh"></i> Native </button>
                      <button class="btn btn-info" ng-click="jsSort('SELECTION')"><i class="icon-white icon-refresh"></i> Selection</button>
@@ -47,8 +51,18 @@
                   </div>
                   </td>
                </tr>
+<!-- waiting to fix CORS cross-site issue
+               <tr>
+                  <td> Ruby On Rails (sends AJAX call to a RoR Server) 
+                  <div class="pull-right">
+                     <button class="btn btn-primary" ng-click="rorSort('NATIVE')"><i class="icon-white icon-refresh"></i> Native </button>
+                     <button class="btn btn-info" ng-click="rorSort('SELECTION')"><i class="icon-white icon-refresh"></i> Selection</button>
+                     <button class="btn btn-success" ng-click="rorSort('INSERTION')"><i class="icon-white icon-refresh"></i> Insertion</button>
+                     <button class="btn btn-warning" ng-click="rorSort('QUICK')"><i class="icon-white icon-refresh"></i> Quick</button>
+                  </div>
+                  </td>
+               </tr>
+//-->
             </table>
          <div>
-         <h3>{{message}}</h3>
-         <p>{{output}}</p>
       </div>

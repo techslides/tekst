@@ -23,7 +23,17 @@ Install and Execute
 * Point browser to localhost:8000/ 
 
 You may need to set the REST_SERVER_URL variable in js/app.js to your url.
-`var REST_SERVER_URL = "http://localhost:8000/rest";`
+```
+var REST_SERVER_URL = "http://localhost:8000/rest";
+var GAME_SERVER_URL = "http://localhost:8000/game";
+var ROR_SERVER_URL  = "http://localhost:3000/api/rest/sort";
+```
+
+Launch the Go Server and the Ruby On Rails Server
+```
+cd ~/toolkit/ruby/rubysort; rails server > /home/kyle/ror.log &
+cd ~/tekst; ./tekst > /home/kyle/tekst.log &
+```
 
 Request json payload format
 -------------------
@@ -48,6 +58,18 @@ Action to Sort Mapping
 
 Testing
 -------
+Go code unit test
+```
+cd code/tekst
+go test -v
+```
+
+Javascript unit test
+```
+./scripts/test.sh 
+```
+
+## Curl
 ```
 curl -X POST -d "{\"action\" : \"SELECTION\", \"data\" : [\"This is a string to sort.\" ]}" 
       http://localhost:8000/rest
@@ -55,15 +77,6 @@ curl -X POST -d "{\"action\" : \"SELECTION\", \"data\" : [\"This is a string to 
 
 Dev Notes
 ---------
-Go code unit test
-```
-cd code/tekst
-go test -v
-```
-Javascript unit test
-```
-./scripts/test.sh 
-```
 Build and run
 ```
 go build;

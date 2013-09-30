@@ -1,5 +1,6 @@
-var REST_SERVER_URL = "http://localhost:8000/rest";
-var GAME_SERVER_URL = "http://localhost:8000/game";
+var REST_SERVER_URL = "http://kyledinh.com:8000/rest";
+var GAME_SERVER_URL = "http://kyledinh.com:8000/game";
+var ROR_SERVER_URL  = "http://kyledinh.com:3000/api/rest/sort";
 
 var app = angular.module("app", []);
 
@@ -13,7 +14,7 @@ app.config(function ($routeProvider) {
                                          makeError: deltaCtrl.makeError,
                                       } 
                                  })     
-                 .otherwise( {template: "404 Not Found!"} )     
+                 .otherwise( {template: "404 Not Found!"} );
 })
 
 app.run(function ($rootScope, $log) {
@@ -52,6 +53,7 @@ app.controller("AppCtrl", function ($rootScope) {
 
 function AlphaCtrl($scope, $http, DataService) {
    $scope.data = DataService;
+
    $scope.goSort = function(act) { 
       console.log("Sort with " + act + " by " + $scope.data.criteria);
       var delim = ($scope.data.criteria === "CHAR") ? "" : " ";
@@ -73,6 +75,29 @@ function AlphaCtrl($scope, $http, DataService) {
          $scope.status = status + " " + headers;
       });
    } 
+
+   $scope.rorSort = function(act) { 
+      console.log("Sort with " + act + " by " + $scope.data.criteria);
+      var delim = ($scope.data.criteria === "CHAR") ? "" : " ";
+      $http({
+         url: ROR_SERVER_URL,
+         method: "POST",
+         data: JSON.stringify({action: act, data: $scope.data.sourcetext.split(delim)}),
+         headers: {"Content-Type": "application/json"}
+      }).success(function (data, status, headers, config) {
+         if (data.status === "fail") {
+            $scope.message = data.error;         
+            $scope.output = "";
+            alert("Error with the JSON Response");
+         } else {      
+            $scope.message = data.message;
+            $scope.output = data.data.join(" ");    // data json from "data" (payload)
+         }
+      }).error(function (data, status, headers, config) {
+         $scope.status = status + " " + headers;
+      });
+   } 
+
    $scope.jsSort = function(act) {
       console.log("Sort with " + act + " by " + $scope.data.criteria)
       var delim = ($scope.data.criteria === "CHAR") ? "" : " ";
