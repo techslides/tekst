@@ -32,7 +32,7 @@
                   </td>
                </tr>            
                <tr>
-                  <td> Go Lang (sends AJAX call to a Go Server) 
+                  <td> <b>Go Lang</b> (sends AJAX to Go)<br/>(*Quicksort not implemented to show JSON error response) 
                   <div class="pull-right">
                      <button class="btn btn-primary" ng-click="goSort('NATIVE')"><i class="icon-white icon-refresh"></i> Native </button>
                      <button class="btn btn-info" ng-click="goSort('SELECTION')"><i class="icon-white icon-refresh"></i> Selection</button>
@@ -42,7 +42,7 @@
                   </td>
                </tr>
                <tr>
-                  <td> Javascript (processes the task locally) 
+                  <td> <b>Javascript</b> (processes the task locally) 
                   <div class="pull-right">
                      <button class="btn btn-primary" ng-click="jsSort('NATIVE')"><i class="icon-white icon-refresh"></i> Native </button>
                      <button class="btn btn-info" ng-click="jsSort('SELECTION')"><i class="icon-white icon-refresh"></i> Selection</button>
@@ -51,9 +51,8 @@
                   </div>
                   </td>
                </tr>
-<!-- waiting to fix CORS cross-site issue
                <tr>
-                  <td> Ruby On Rails (sends AJAX call to a RoR Server) 
+                  <td> <b>Ruby On Rails</b> (sends cross-site AJAX call to a RoR Server) 
                   <div class="pull-right">
                      <button class="btn btn-primary" ng-click="rorSort('NATIVE')"><i class="icon-white icon-refresh"></i> Native </button>
                      <button class="btn btn-info" ng-click="rorSort('SELECTION')"><i class="icon-white icon-refresh"></i> Selection</button>
@@ -62,7 +61,6 @@
                   </div>
                   </td>
                </tr>
-//-->
             </table>
          <div>
       </div>

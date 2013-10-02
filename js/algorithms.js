@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 function Stopwatch(debug) {
    this.begin;
@@ -34,7 +34,6 @@ function swap (items, x, y) {
 
 function selectionSort(items) {
    var N = items.length; 
-   console.log("selectionSort " + N + " items");
    var min;
    for (var i = 0; i < N; i++) {
       min = i;
@@ -48,14 +47,16 @@ function selectionSort(items) {
       //swap the min found with pointer i
       swap(items, i , min);
    }
+   console.log("selectionSort " + N + " items");
    return items;
 }
 
 function insertionSort(items) {
    var N = items.length;
+   var i, j;
    console.log("insertionSort " + N + " items");
-   for (var i = 0; i < N; i++) {
-      for (var j = i; j > 0; j--) {
+   for (i = 0; i < N; i++) {
+      for (j = i; j > 0; j--) {
          if (items[j] < items[j-1]) {
             swap(items, j, j-1);
          } else {
@@ -106,25 +107,25 @@ function maxRoundedNum(num, max) {
 }
 
 function bucketSort(arr, n) {
-   var items  = new Array();
-   var bucket = new Array();
+   var items  = [];
+   var bucket = [];
    var len = arr.length;
    var i;
 
    for (i = 0; i < n; i++) {
-       bucket[i] = new Array();
+      bucket[i] = [];
    }
    for (i = 0; i < len; i++) {
-       var y = maxRoundedNum(Math.pow(arr[i], 1/5), n-1);
-       bucket[y].push(arr[i]); 
+      var y = maxRoundedNum(Math.pow(arr[i], 1/5), n-1);
+      bucket[y].push(arr[i]); 
    }
    for (i = 0; i < n; i++) {
-       var buckarr = insertionSort(bucket[i]);
-       console.log("bucket :" + buckarr);
-       items = items.concat(buckarr); 
+      var buckarr = insertionSort(bucket[i]);
+      console.log("bucket :" + buckarr);
+      items = items.concat(buckarr); 
    }
    return items; 
 }
 
-//var test_numbers = [112,1,223,3234,453,67,345,24554,3423,567675,231,3134,453,88,0,5,234,23,34234654,5456,2342,234];
+var test_numbers = [112,1,223,3234,453,67,345,24554,3423,567675,231,3134,453,88,0,5,234,23,34234654,5456,2342,234];
 
