@@ -1,9 +1,9 @@
-//var REST_SERVER_URL = "http://kyledinh.com:8000/rest";
-//var GAME_SERVER_URL = "http://kyledinh.com:8000/game";
-//var ROR_SERVER_URL  = "http://kyledinh.com:3000/api/rest/sort";
-var REST_SERVER_URL = "http://localhost:8000/rest";
-var GAME_SERVER_URL = "http://localhost:8000/game";
-var ROR_SERVER_URL  = "http://localhost:3000/api/rest/sort";
+var REST_SERVER_URL = "http://kyledinh.com:8000/rest";
+var GAME_SERVER_URL = "http://kyledinh.com:8000/game";
+var ROR_SERVER_URL  = "http://kyledinh.com:3000/api/rest/sort";
+//var REST_SERVER_URL = "http://localhost:8000/rest";
+//var GAME_SERVER_URL = "http://localhost:8000/game";
+//var ROR_SERVER_URL  = "http://localhost:3000/api/rest/sort";
 
 var app = angular.module("app", []);
 
