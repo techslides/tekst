@@ -13,6 +13,7 @@ Stack
 * Twitter Bootstrap
 * AngularJS
 * Go Lang
+* Ruby on Rails
 
 Install and Execute
 -------------------
