@@ -45,8 +45,8 @@ Request json payload format
 Response json format
 --------------------
 ```
-{ "status":"success", "message":"30ms : 6 elements", "data": ["an", "example",
-     "is", "sort", "string", This"] }
+{ "status":"success", "message":"30ms : 6 elements", "data": ["This","an", "example",
+     "is", "sort", "string"] }
 ```
 
 Action to Sort Mapping
@@ -68,6 +68,13 @@ go test -v
 Javascript unit test
 ```
 ./scripts/test.sh 
+```
+
+Functional Selenium test
+* https://github.com/kyledinh/toolkit/wiki/Selenium-Testing
+```
+cd selenium/
+go test
 ```
 
 ## Curl
