@@ -70,10 +70,7 @@ Javascript unit test
 ./scripts/test.sh 
 ```
 
-Functional Selenium test
-* https://github.com/kyledinh/toolkit/wiki/Selenium-Testing
-
-
+Functional Selenium test - [wiki](https://github.com/kyledinh/toolkit/wiki/Selenium-Testing)
 ```
 cd test/selenium/
 go test
