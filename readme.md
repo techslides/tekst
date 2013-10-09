@@ -75,7 +75,7 @@ Functional Selenium test
 
 
 ```
-cd selenium/
+cd test/selenium/
 go test
 ```
 
