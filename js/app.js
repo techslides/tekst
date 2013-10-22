@@ -211,7 +211,9 @@ bootstrap.toggleAccordion = function(id) {
    document.getElementById(id).classList.add('in');   
    if (document.getElementById(id).style.height === "auto") { 
       document.getElementById(id).style.height = "0px";
+      document.getElementById(id).style.display = "none";
    } else {
+      document.getElementById(id).style.display = "block";
       document.getElementById(id).style.height = "auto";
    }
 }

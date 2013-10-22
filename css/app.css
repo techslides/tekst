@@ -35,3 +35,51 @@
    left:-100px;
    opacity:0;
 }
+
+
+
+
+.page-header {
+	margin-top: 0;
+}
+
+.panel-body {
+	padding-top: 0;
+}
+
+.featuredImg {
+	margin-bottom: 15px;
+}
+
+.spinner {
+	background-image: url('../img/spinner.gif');
+	background-repeat: no-repeat;
+	height: 60px;
+	width: 60px;
+	margin: 0 auto;
+}
+
+footer {
+	padding-top: 50px;
+	padding-bottom: 20px;
+	background: #222222;
+	color: #999999;
+}
+
+.tile-square {
+   height: 36px; 
+   width: 36px;
+}
+
+#game-board {
+   margin-bottom: 36px;
+}
+
+/*
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-size: 12px;
+   line-height: 1.428571429;
+   color: #333333;
+}
+*/
