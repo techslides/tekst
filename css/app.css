@@ -40,30 +40,30 @@
 
 
 .page-header {
-	margin-top: 0;
+   margin-top: 0;
 }
 
 .panel-body {
-	padding-top: 0;
+   padding-top: 0;
 }
 
 .featuredImg {
-	margin-bottom: 15px;
+   margin-bottom: 15px;
 }
 
 .spinner {
-	background-image: url('../img/spinner.gif');
-	background-repeat: no-repeat;
-	height: 60px;
-	width: 60px;
-	margin: 0 auto;
+   background-image: url('../img/spinner.gif');
+   background-repeat: no-repeat;
+   height: 60px;
+   width: 60px;
+   margin: 0 auto;
 }
 
 footer {
-	padding-top: 50px;
-	padding-bottom: 20px;
-	background: #222222;
-	color: #999999;
+   padding-top: 50px;
+   padding-bottom: 20px;
+   background: #222222;
+   color: #999999;
 }
 
 .tile-square {
@@ -75,9 +75,32 @@ footer {
    margin-bottom: 36px;
 }
 
+/*  D3 */
+
+svg .counties {
+   fill: none;
+}
+
+svg .states {
+   fill: none;
+   stroke: #fff;
+   stroke-linejoin: round;
+}
+
+svg .q0-9 { fill:rgb(247,251,255); }
+svg .q1-9 { fill:rgb(222,235,247); }
+svg .q2-9 { fill:rgb(198,219,239); }
+svg .q3-9 { fill:rgb(158,202,225); }
+svg .q4-9 { fill:rgb(107,174,214); }
+svg .q5-9 { fill:rgb(66,146,198); }
+svg .q6-9 { fill:rgb(33,113,181); }
+svg .q7-9 { fill:rgb(8,81,156); }
+svg .q8-9 { fill:rgb(8,48,107); }
+
+
 /*
 body {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
    font-size: 12px;
    line-height: 1.428571429;
    color: #333333;

@@ -11,7 +11,8 @@ app.config(function ($routeProvider) {
    $routeProvider.when('/',      { controller:"AppCtrl",   templateUrl:"app_tpl" })     
                  .when('/alpha', { controller:"AlphaCtrl", templateUrl:"/html/sort.tpl" })     
                  .when('/beta',  { controller:"BetaCtrl",  templateUrl:"/html/bootstrap.tpl" })     
-                 .when('/delta', { controller:"DeltaCtrl", templateUrl:"/html/mindsweep.tpl" })     
+                 .when('/delta', { controller:"DeltaCtrl", templateUrl:"/html/mindsweep.tpl" })    
+                 .when('/gamma', { controller:"GammaCtrl", templateUrl:"/html/choropleth.tpl" })  
                  .when('/error', { controller:"DeltaCtrl", templateUrl:"error_tpl", 
                                       resolve: {
                                          makeError: deltaCtrl.makeError,
@@ -135,6 +136,60 @@ function BetaCtrl($scope, DataService) {
    $scope.closeModal = bootstrap.closeModal;
    $scope.toggleAccordion = bootstrap.toggleAccordion;
  
+}
+
+function GammaCtrl($scope) {
+   var width = 960;
+   var height = 500;
+   var rateById = d3.map();
+   var quantize = d3.scale.quantize()
+      .domain([0, .15])
+      .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+
+   var path = d3.geo.path();
+
+   var svg = d3.select("#stage").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+   $scope.binh = [ {"id" : 23 }, {"id": 45 } ];
+   $scope.binh.push({"id" : 99 });
+
+   var killSpinner = function () {
+      d3.select("#spinner").attr("class","");
+      console.log("Just killed spinner.")
+   }
+
+   var blahh = function () {
+         $scope.binh.push({"id" : 99097 });
+         console.log("push len : " + $scope.binh.length);
+   }
+
+   queue()
+      .defer(d3.json, "/data/us.json")
+      .defer(d3.tsv, "/data/unemployment.tsv", function(d) { rateById.set(d.id, +d.rate); })
+      .await(function(error, us) {
+         killSpinner();
+         svg.append("g")
+            .attr("class", "counties")
+            .selectAll("path")
+            .data(topojson.feature(us, us.objects.counties).features)
+            .enter().append("path")
+            .attr("class", function(d) { return quantize(rateById.get(d.id)); })
+            .attr("d", path)
+            .on("click", $scope.clicked);
+
+         svg.append("path")
+            .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+            .attr("class", "states")
+            .attr("d", path);
+      });
+
+   $scope.clicked = function(d) {
+      console.log(d);
+      $scope.binh.push({"id" : "AA" });
+      blahh();
+   }
 }
 
 var deltaCtrl = app.controller("DeltaCtrl", function ($scope, $http) {
