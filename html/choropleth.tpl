@@ -1,5 +1,5 @@
       <div><h1>Choropleth - By US Counties</h1>
-         <p>This map used d3js to display the unemployment rater by counties. Each county is clickable.</p>
+         <p>This map uses d3js to display the unemployment rate by counties. Each county is clickable.</p>
                  
          <br clear="all"/>         
          <div id="selection-board">
