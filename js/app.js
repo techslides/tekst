@@ -152,17 +152,11 @@ function GammaCtrl($scope) {
       .attr("width", width)
       .attr("height", height);
 
-   $scope.binh = [ {"id" : 23 }, {"id": 45 } ];
-   $scope.binh.push({"id" : 99 });
+   $scope.binh = [];
 
    var killSpinner = function () {
       d3.select("#spinner").attr("class","");
       console.log("Just killed spinner.")
-   }
-
-   var blahh = function () {
-         $scope.binh.push({"id" : 99097 });
-         console.log("push len : " + $scope.binh.length);
    }
 
    queue()
@@ -187,8 +181,9 @@ function GammaCtrl($scope) {
 
    $scope.clicked = function(d) {
       console.log(d);
-      $scope.binh.push({"id" : "AA" });
-      blahh();
+      $scope.binh.push({ "id" : d.id });
+      console.log("push len : " + $scope.binh.length);
+      $scope.$apply();
    }
 }
 
