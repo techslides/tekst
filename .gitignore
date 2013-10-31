@@ -6,5 +6,7 @@
 *.iml
 *.DS_store
 .idea
+og.*
+tekst
 
 build/
