@@ -71,12 +71,14 @@ Javascript unit test
 ```
 
 Functional Selenium test - [wiki](https://github.com/kyledinh/toolkit/wiki/Selenium-Testing)
+
 ```
 cd test/selenium/
 go test
 ```
 
-## Curl
+Curl
+-----------
 ```
 curl -X POST -d "{\"action\" : \"SELECTION\", \"data\" : [\"This is a string to sort.\" ]}" 
       http://localhost:8000/rest
