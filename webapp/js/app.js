@@ -288,10 +288,14 @@ deltaCtrl.makeError = function ($q, $timeout) {
 //<donut-chart>
 app.directive('donutChart', function() {
     return {
-        scope: { 'data': '=', 'onClick': '&' },
+        scope: { 'data': '=', 'onClick': '&', width: '&', 
+            height: '&' },
+        controller: function($scope) {
+           $scope.width = util.defaultValue($scope.width, 200, 100); 
+           $scope.height = util.defaultValue($scope.height, 200, 100); },
         restrict: 'E',
-        link: function(scope, element) {
-            var pie = new PieChart(element, scope.data);
+        link: function(scope, element, attr) {
+            var pie = new PieChart(element, scope.data, scope.width, scope.height);
             pie.onClick = function() {
                 scope.$apply(function(){
                     if(scope.onClick) scope.onClick();
@@ -322,12 +326,10 @@ app.controller('ZetaCtrl', function($scope){
  * D3JS Charts 
  */
 
-function PieChart(element, data) {
+function PieChart(element, data, width, height) {
     var self = this;
     var color = d3.scale.category10();
     var el = element[0];
-    var width = el.clientWidth;
-    var height = el.clientHeight;
     var min = Math.min(width, height);
     var pie = d3.layout.pie().sort(null);
     var arc = d3.svg.arc()
@@ -353,7 +355,7 @@ function PieChart(element, data) {
         .each(function(d) { return this._current = d });
 
     var arcTween = function (a) {
-      // see: http://bl.ocks.org/mbostock/1346410
+        // see: http://bl.ocks.org/mbostock/1346410
         var i = d3.interpolate(this._current, a);
         this._current = i(0);
         return function(t) {
@@ -391,8 +393,17 @@ function PieChart(element, data) {
 
 
 /* 
- * Bootstrap Utils
+ * Utilities 
  */
+
+var util = {};
+
+util.defaultValue = function defaultValue(param, val, min) {
+    // Util for making directives attrs optional with a default
+    if ((param === 'undefined') || (param === null) || (isNaN(param))) { return val; } 
+    if (param <= min) { return val; }
+    return param;
+};
 
 var bootstrap = {};
 
