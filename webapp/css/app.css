@@ -80,6 +80,17 @@ footer {
 
 /*  D3 */
 
+donut-chart{
+  width: 200px;
+  height: 200px;
+  display:inline-block;
+  cursor: pointer;
+}
+ul{
+    list-style-type: none;
+}
+
+
 svg .counties {
    fill: none;
 }
