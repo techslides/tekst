@@ -288,8 +288,7 @@ deltaCtrl.makeError = function ($q, $timeout) {
 //<donut-chart>
 app.directive('donutChart', function() {
     return {
-        scope: { 'data': '=', 'onClick': '&', width: '&', 
-            height: '&' },
+        scope: { 'data': '=', 'onClick': '&', width: '&', height: '&' },
         controller: function($scope) {
            $scope.width = util.defaultValue($scope.width, 200, 100); 
            $scope.height = util.defaultValue($scope.height, 200, 100); },
@@ -310,8 +309,7 @@ app.controller('ZetaCtrl', function($scope){
     // controller "knows" nothing about donut charts
     $scope.shared = { data: [ 10, 20, 30, 40 ] };
     $scope.chartClicked = function() {
-        var len = $scope.shared.data.length,
-            i;
+        var i, len = $scope.shared.data.length;
         for (i = 0; i < len; i++) { 
             $scope.shared.data[i] = Math.floor(Math.random()*50)+1;
             //removed this and underscore.js _.each($scope.shared.data, function(d, index) {
