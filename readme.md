@@ -65,13 +65,18 @@ cd code/tekst
 go test -v
 ```
 
-Javascript unit test
+Karma unit test; see the karma/karma.conf.js for configuration
 ```
-./scripts/test.sh 
+./karma/test.sh 
 ```
 
-Functional Selenium test - [wiki](https://github.com/kyledinh/toolkit/wiki/Selenium-Testing)
+Functional Selenium test - [wiki](https://github.com/kyledinh/toolkit/wiki/Selenium-Testing)  
+Run the selenium-standalone in [toolkit/selenium](https://github.com/kyledinh/toolkit/tree/master/selenium)
+```
+java -jar selenium-server-standalone-2.35.0.jar
+```
 
+Then run the test
 ```
 cd test/selenium/
 go test
