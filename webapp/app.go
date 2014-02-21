@@ -5,7 +5,7 @@
 package main
 
 import (
-     "../src/tekst"
+     "../src/go/tekst"
      "encoding/json"
      "fmt"
      "html/template"
