@@ -5,11 +5,11 @@
 package main
 
 import (
-     "../src/go/tekst"
-     "encoding/json"
-     "fmt"
-     "html/template"
-     "io/ioutil"
+    "../src/go/tekst"
+    "encoding/json"
+    "fmt"
+    "html/template"
+    "io/ioutil"
     "log"
     "net/http"
     "os"

@@ -1,4 +1,4 @@
-basePath = '../';
+basePath = '../';   // up to the tekst root directory 
 
 files = [
   JASMINE,

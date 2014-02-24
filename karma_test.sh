@@ -1,7 +1,11 @@
 #!/bin/bash
 
-/*
- * Run this script from the root dir:  ./scripts/test.sh
- */
+# BASE_DIR=`dirname $0` 
+BASE_DIR=karma
 
-karma/test.sh
+echo ""
+echo "BASE_DIR: $BASE_DIR"
+echo "Starting Karma Server (http://karma-runner.github.io)"
+echo "-------------------------------------------------------------------"
+
+karma start $BASE_DIR/karma.conf.js $*
