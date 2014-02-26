@@ -4,8 +4,7 @@ A webservice that has a Angular/Javascript frontend that communicates through aj
 
 The services runs on the default :8000 port.
 
-<a href="http://kyledinh.com:8000/"><img src="https://lh5.googleusercontent.com/0E4nqO6llKpEu49I2Z37E8n_70MvzsNvyqjiOu-E-7QJvRZ3gKTJXB-MCBGj3sXQUBl8fQcvOU656PvZxFWNykhJS-N2amjCdaXceRNbenYY7TAXup6xx48-" 
-height="531" width="600" /></a>
+<a href="http://kyledinh.com:8000/"><img src="https://raw.github.com/kyledinh/tekst/master/webapp/img/tekstapp_screen.png" height="540" width="600" /></a>
 
 [Online Demo](http://kyledinh.com:8000/view/)
 
