@@ -14,6 +14,7 @@ app.config(function ($routeProvider) {
         .when('/delta', { controller:"DeltaCtrl", templateUrl:"/html/mindsweep.tpl" })     
         .when('/gamma', { controller:"GammaCtrl", templateUrl:"/html/choropleth.tpl" })  
         .when('/zeta', { controller:"ZetaCtrl", templateUrl:"/html/dataviz.tpl" })  
+        .when('/dna', { controller:"DnaCtrl", templateUrl:"/html/dna.tpl" })  
         .when('/error', { controller:"DeltaCtrl", templateUrl:"error_tpl", 
             resolve: {
                 makeError: deltaCtrl.makeError,

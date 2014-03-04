@@ -1,7 +1,6 @@
 
 /* Directives */
 
-
 app.directive("error", function ($rootScope) {
     return {
         restrict:"E",
