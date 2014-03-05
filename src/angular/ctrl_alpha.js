@@ -22,7 +22,7 @@ function AlphaCtrl($scope, $http, DataService) {
         }).error(function (data, status, headers, config) {
             $scope.status = status + " " + headers;
         });
-    } 
+    }; 
 
     $scope.rorSort = function(act) { 
         console.log("Sort with " + act + " by " + $scope.data.criteria);
@@ -44,7 +44,7 @@ function AlphaCtrl($scope, $http, DataService) {
         }).error(function (data, status, headers, config) {
             $scope.status = status + " " + headers;
         });
-    } 
+    };
 
     $scope.jsSort = function(act) {
         console.log("Sort with " + act + " by " + $scope.data.criteria)
@@ -68,7 +68,7 @@ function AlphaCtrl($scope, $http, DataService) {
             alert("ERROR: " + act + " Not yet implemented!");
             $scope.output = ""; 
         }
-    }        
+    };        
 }
     
 /* // ctrl_alpha.js ---^^-------------- */

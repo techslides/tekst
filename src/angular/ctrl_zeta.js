@@ -8,10 +8,10 @@ app.controller('ZetaCtrl', function($scope){
             $scope.shared.data[i] = Math.floor(Math.random()*50)+1;
             //removed this and underscore.js _.each($scope.shared.data, function(d, index) {
         }
-    }
+    };
     $scope.addValue = function() {
         $scope.shared.data.push(Math.floor(Math.random()*30))+1;
-    }
+    };
 });
 
 /* // ctrl_zeta.js ---^^-------------- */

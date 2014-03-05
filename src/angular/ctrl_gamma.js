@@ -49,7 +49,7 @@ function GammaCtrl($scope) {
                 .attr("class", "states")
                 .attr("d", path);
         });
-    }
+    };
 
     $scope.flu = function() {
         svg.remove();
@@ -75,14 +75,14 @@ function GammaCtrl($scope) {
                     .attr("class", "states")
                     .attr("d", path);
             });
-    }    
+    };   
 
     $scope.clicked = function(d) {
         console.log(d);
         $scope.binh.push({ "id" : d.id });
-        console.log("push len : " + $scope.binh.length);
         $scope.$apply();
-    }
+        console.log("push len : " + $scope.binh.length);
+    };
 }
 /* // ctrl_gamma.js ---^^-------------- */
 
