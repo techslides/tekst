@@ -54,13 +54,6 @@
    margin-bottom: 15px;
 }
 
-.spinner {
-   background-image: url('../img/spinner.gif');
-   background-repeat: no-repeat;
-   height: 60px;
-   width: 60px;
-   margin: 0 auto;
-}
 
 footer {
    padding-top: 50px;

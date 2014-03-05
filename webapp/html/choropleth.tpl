@@ -10,7 +10,13 @@
 	  <br clear="all"/>
 
           <div class="col-lg-8" id="stage"> 
-          <div class="" id="spinner"></div>        
+         
+          <div id="spinner" class="progress progress-striped active">
+          <div class="progress-bar"  role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="50" style="width: 100%">
+          
+          </div>
+          </div>
+
           </div><!-- col-lg-8 -->
 
        </div><!-- Choropleth-->

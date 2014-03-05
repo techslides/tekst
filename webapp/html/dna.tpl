@@ -10,5 +10,11 @@
 
          <h3>{{message}}</h3>
          <p>{{output}}</p>
+         <div ng-repeat="report in reports">
+              <h3>{{report.name}} </h3>
+              <ul>
+                  <li ng-repeat="(key, value) in report.mutations">{{key}} : {{value}}</li>
+              </ul>
+         </div>
 
       </div>
