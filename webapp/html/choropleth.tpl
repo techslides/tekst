@@ -7,15 +7,20 @@
               <span ng-repeat="n in binh"><button class="btn btn-success" ng-click="play()">{{n.id}}</button></span>
           </div>
          
-	  <br clear="all"/>
+	       <br clear="all"/>
 
           <div class="col-lg-8" id="stage"> 
          
-          <div id="spinner" class="progress progress-striped active">
-          <div class="progress-bar"  role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="50" style="width: 100%">
-          
-          </div>
-          </div>
+         <!--- SHELFED: toggle spinner 
+          // ---- >
+
+            <div ng-hide="spinner" class="progress progress-striped active">
+              <div class="progress-bar"  role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="50" style="width: 100%">          
+              </div>
+            </div>
+
+            <div ng-show="spinner"></div>
+
 
           </div><!-- col-lg-8 -->
 

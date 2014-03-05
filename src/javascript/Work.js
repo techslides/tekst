@@ -1,3 +1,8 @@
+/* src/javascript/Work.js */
+
+/*
+ * Written by Kyle Dinh, 2014. 
+ */
 (function () { 
 
     function Work(controlStr, sampleStr, wordLength) {

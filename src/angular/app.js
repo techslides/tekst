@@ -24,8 +24,13 @@ app.config(function ($routeProvider) {
 
 app.run(function ($rootScope, $log) {
     $rootScope.$log = $log;
-})
+});
 
+app.controller("AppCtrl", function ($rootScope) {  
+    $rootScope.$on("$routeChangeError", function (event, current, previous, rejection) {
+        console.log(rejection);
+    })    
+});
 
 /* 
  * Utilities 
@@ -67,3 +72,6 @@ bootstrap.closeModal = function(id) {
     document.getElementById(id).setAttribute("aria-hidden","false");        
     document.getElementById("backdrop").classList.remove('modal-backdrop');
 }
+
+
+
