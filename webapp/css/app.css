@@ -71,6 +71,10 @@ footer {
    margin-bottom: 36px;
 }
 
+.margin-4 {
+   margin-bottom: 4px;
+}
+
 /*  D3 */
 
 donut-chart {

@@ -1,4 +1,3 @@
-
 /* Directives */
 
 app.directive("error", function ($rootScope) {
@@ -12,7 +11,6 @@ app.directive("error", function ($rootScope) {
         }
     }
 });
-
 
 //<donut-chart>
 app.directive('donutChart', function() {
@@ -33,6 +31,32 @@ app.directive('donutChart', function() {
         }
     };
 });
+
+//<dna-report>
+app.directive('dnaReport', function() {
+    return {
+        scope: { 'data': '=', 'onClick': '&', width: '&', height: '&' },
+        restrict: 'E',
+        controller: function($scope) {
+           $scope.width = util.defaultValue($scope.width, 200, 100); 
+           $scope.height = util.defaultValue($scope.height, 200, 100); },
+
+        link: function(scope, element, attr) {
+            var report = new DnaReport(element, scope.data, scope.width, scope.height);
+            pie.onClick = function() {
+                scope.$apply(function(){
+                    if(scope.onClick) scope.onClick();
+                });
+            };
+            scope.$watchCollection('data', pie.updateData);
+        }
+    };
+});
+
+function DnaReport(element, data, width, height) {
+
+}
+
 
 /* 
  * D3JS Charts 
@@ -73,9 +97,10 @@ function PieChart(element, data, width, height) {
         return function(t) {
             return arc(i(t));
         };
-    }
+    };
+
     this.onClick = function() {
-      
+        // not defined
     };
     
     this.updateData = function(newData, oldData) {
@@ -100,5 +125,5 @@ function PieChart(element, data, width, height) {
             .duration(duration)
             .each(function(d){ d.startAngle = 2 * PI - 0.001; d.endAngle = 2 * PI; })
             .attrTween('d', arcTween).remove();
-    }
+    };
 }
