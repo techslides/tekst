@@ -19,3 +19,8 @@ cat src/angular/services.js >> webapp/js/app.js
 cat src/javascript/algorithms.js >> webapp/js/app.js
 cat src/javascript/mindsweep.js >> webapp/js/app.js
 cat src/javascript/Work.js >> webapp/js/app.js
+
+if [ "$1" == "dev" ]; then
+   cat src/javascript/dev.js >> webapp/js/app.js
+   echo "!!! USING DEV ENVIRONMENTS !!!!!!! "
+fi
