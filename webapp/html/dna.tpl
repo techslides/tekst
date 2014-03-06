@@ -22,7 +22,7 @@
                   <text id="6" sketch:type="MSTextLayer" font-family="Arial Black" font-size="18" font-weight="686" line-spacing="24" letter-spacing="0.0281250011" fill="#D4D4D4">
                     <tspan x="16" y="30">{{report.name}}</tspan>
                   </text>
-                  <rect ng-repeat="(key, value) in report.mutations" id="line" fill="#4990E2" sketch:type="MSShapeGroup" x="{{10 * key + 40}}" y="-2" width="5" height="46"></rect>
+                  <rect ng-repeat="(key, value) in report.mutations" id="line" fill="#4990E2" sketch:type="MSShapeGroup" x="{{10*key + 100}}" y="-2" width="5" height="46"></rect>
                 </g>
               </svg>
 
