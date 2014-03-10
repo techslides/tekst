@@ -35,11 +35,11 @@ app.controller("AppCtrl", function ($rootScope) {
 
 var util = {};
 
-util.defaultValue = function defaultValue(param, val, min) {
+util.defaultValue = function defaultValue(arg, val, min) {
     // Util for making directives attrs optional with a default
-    if ((param === 'undefined') || (param === null) || (isNaN(param))) { return val; } 
-    if (param <= min) { return val; }
-    return param;
+    if ((arg == undefined) || (arg === null) || (isNaN(arg))) { return val; } 
+    if (arg <= min) { return val; }
+    return arg;
 };
 
 var bootstrap = {};
