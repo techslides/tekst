@@ -39,9 +39,6 @@
    opacity:0;
 }
 
-
-
-
 .page-header {
    margin-top: 0;
 }
@@ -125,3 +122,17 @@ body {
    color: #333333;
 }
 */
+
+.bg_tekstappsvg {
+    background-image: url('data:image/svg+xml;charset=utf-8,<svg width="1170px" height="600px" viewBox="0 0 1170 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>Slice 1</title>
+    <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <rect id="Rectangle-1" fill="#D8D8D8" sketch:type="MSShapeGroup" x="0" y="0" width="1170" height="600"></rect>
+        <text id="tekst-app" sketch:type="MSTextLayer" transform="translate(-13.000000, 450.500000) rotate(-270.000000) translate(13.000000, -450.500000) " font-family="Arial Black" font-size="113.76" font-weight="686" line-spacing="56.88" letter-spacing="0.177750006" fill="#FFFFFF">
+            <tspan x="-440" y="547">tekst app</tspan>
+        </text>
+    </g>
+</svg>');
+}

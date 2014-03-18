@@ -24,7 +24,7 @@ app.directive('donutChart', function() {
             var pie = new PieChart(element, scope.data, scope.width, scope.height);
             pie.onClick = function() {
                 scope.$apply(function() {
-                    if(scope.onClick) scope.onClick();
+                    if (scope.onClick) scope.onClick();
                 });
             };
             scope.$watchCollection('data', pie.updateData);
@@ -58,6 +58,19 @@ function DnaReport(element, data, width, height) {
 }
 
 
+app.directive('flowChart', function() {
+    return {
+        restrict: 'E',
+        templateUrl: "/html/flowchart_svg.tpl",
+        replace: true,
+        scope: {
+            chart: "=chart",
+        },
+
+        controller: 'FlowChartController',
+    };
+});
+
 /* 
  * D3JS Charts 
  */
@@ -65,17 +78,13 @@ function DnaReport(element, data, width, height) {
 function PieChart(element, data, width, height) {
     var self = this;
     var color = d3.scale.category10();
-    var el = element[0];
+    var root = element[0];
     var min = Math.min(width, height);
     var pie = d3.layout.pie().sort(null);
-    var arc = d3.svg.arc()
-        .outerRadius(min / 2 * 0.9)
-        .innerRadius(min / 2 * 0.5);
+    var arc = d3.svg.arc().outerRadius(min / 2 * 0.9).innerRadius(min / 2 * 0.5);
       
-    svg = d3.select(el).append('svg')
-        .attr({width: width, height: height})
-        .append('g')
-        .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+    svg = d3.select(root).append('svg').attr({width: width, height: height})
+        .append('g').attr('transform', 'translate(' + width/2 + ',' + height/2 + ')');
 
     svg.on('mousedown', function(d) {
         self.onClick();
@@ -90,7 +99,7 @@ function PieChart(element, data, width, height) {
         // store the initial angles
         .each(function(d) { return this._current = d });
 
-    var arcTween = function (a) {
+    var arcTween = function(a) {
         // see: http://bl.ocks.org/mbostock/1346410
         var i = d3.interpolate(this._current, a);
         this._current = i(0);

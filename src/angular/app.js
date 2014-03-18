@@ -4,7 +4,7 @@ var ROR_SERVER_URL  = "http://kyledinh.com:3000/api/rest/sort";
 
 var app = angular.module("app", ['ui.bootstrap']);
 
-app.config(function ($routeProvider) {
+app.config(function($routeProvider) {
     $routeProvider.when('/', { controller:"AppCtrl", templateUrl:"app_tpl" })      
         .when('/alpha', { controller:"AlphaCtrl", templateUrl:"/html/sort.tpl" })      
         .when('/beta',  { controller:"BetaCtrl",  templateUrl:"/html/bootstrap.tpl" })      
@@ -16,17 +16,17 @@ app.config(function ($routeProvider) {
             resolve: {
                 makeError: deltaCtrl.makeError,
             } 
-        }).otherwise( {template: "404 Not Found!"} );
+        }).otherwise( { template: "404 Not Found!" } );
 });
 
-app.run(function ($rootScope, $log) {
+app.run(function($rootScope, $log) {
     $rootScope.$log = $log;
 });
 
-app.controller("AppCtrl", function ($rootScope) {  
+app.controller("AppCtrl", function($rootScope) {  
     $rootScope.$on("$routeChangeError", function (event, current, previous, rejection) {
         console.log(rejection);
-    })    
+    });    
 });
 
 /* 
@@ -54,21 +54,20 @@ bootstrap.toggleAccordion = function(id) {
         document.getElementById(id).style.display = "block";
         document.getElementById(id).style.height = "auto";
     }
-}
+};
 
 bootstrap.openModal = function(id) {
     document.getElementById("backdrop").classList.add('modal-backdrop');
     document.getElementById(id).style.display = "block";
     document.getElementById(id).classList.add('in');
     document.getElementById(id).setAttribute("aria-hidden","true");
-}
+};
 
 bootstrap.closeModal = function(id) { 
     document.getElementById(id).style.display = "none";
     document.getElementById(id).classList.remove('in');
     document.getElementById(id).setAttribute("aria-hidden","false");        
     document.getElementById("backdrop").classList.remove('modal-backdrop');
-}
-
+};
 
 

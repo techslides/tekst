@@ -15,10 +15,16 @@ var dnaCtrl = app.controller("DnaCtrl", function DnaCtrl($scope) {
     $scope.align = function() {
         var work = new Work($scope.seq_x, $scope.seq_y);
         work.align();
+
+        var mutArr = [];
+        for (var k in work.mutations) {
+            mutArr.push(Object.keys(work.mutations[k])[0]);
+        }
+        console.log("mutArr" + mutArr);
         var obj = {
 	        name: $scope.reports.length +1,
             length: work.len,
-            mutations: work.mutations
+            mutations: mutArr
         };
         $scope.reports.push(obj);
         $scope.output = work.report();
