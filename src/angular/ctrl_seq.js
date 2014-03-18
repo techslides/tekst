@@ -1,8 +1,10 @@
-/* ctrl_dns.js ------vv-------------- */
-var dnaCtrl = app.controller("DnaCtrl", function DnaCtrl($scope) {
+/* ctrl_seq.js ------vv-------------- */
+var seqCtrl = app.controller("SeqCtrl", function SeqCtrl($scope) {
     $scope.message = "";
     $scope.output = "";
     $scope.reports = [];
+    $scope.seq_x = "GATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACA";
+    $scope.seq_y = "GATTACAGATTACAGATTAGAGATTACAGATTACAGATTACAGATTACAGATTACAGATTAGAGATTACAGATTACAGATTAGAGATTACAGATTACGATTACA";
 
     $scope.filterBarOffset = function(items, len, offset) {
         var result = {};
@@ -20,7 +22,7 @@ var dnaCtrl = app.controller("DnaCtrl", function DnaCtrl($scope) {
         for (var k in work.mutations) {
             mutArr.push(Object.keys(work.mutations[k])[0]);
         }
-        console.log("mutArr" + mutArr);
+        console.log("mutArr [" + mutArr + "]");
         var obj = {
 	        name: $scope.reports.length +1,
             length: work.len,
@@ -32,5 +34,5 @@ var dnaCtrl = app.controller("DnaCtrl", function DnaCtrl($scope) {
 });
 
 
-/* // ctrl_dns.js ---^^-------------- */
+/* // ctrl_seq.js ---^^-------------- */
 

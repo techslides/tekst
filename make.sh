@@ -10,7 +10,7 @@ cat src/angular/app.js >> webapp/js/app.js
 cat src/angular/ctrl_alpha.js >> webapp/js/app.js
 cat src/angular/ctrl_beta.js >> webapp/js/app.js
 cat src/angular/ctrl_delta.js >> webapp/js/app.js
-cat src/angular/ctrl_dna.js >> webapp/js/app.js
+cat src/angular/ctrl_seq.js >> webapp/js/app.js
 cat src/angular/ctrl_gamma.js >> webapp/js/app.js
 cat src/angular/ctrl_zeta.js >> webapp/js/app.js
 cat src/angular/directives.js >> webapp/js/app.js

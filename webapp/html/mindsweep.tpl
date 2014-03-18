@@ -1,5 +1,7 @@
       <div><h1>Mindsweep</h1>
          <p>This implementation is incomplete, but you can read the mindsweep library at <a href="https://github.com/kyledinh/toolkit/tree/master/mindsweep">Github.</a></p>
+
+         <p>You can also checkout a multi-player version at <a href="http://kyledinh.com:8080">Websocket/NodeJS version</a>.</p>
                  
          <br clear="all"/>         
          
