@@ -36,18 +36,21 @@ app.directive('donutChart', function() {
 app.directive('infography101', function() {
     return {
         restrict: 'E',
-        transclude: true,
+        transclude: false,
         templateUrl: "/html/infography101.svg",
         replace: true,
         scope: {
-            alpha: '=', beta: '='
+            alpha: '@', beta: '@'
         },
         controller: function($scope) {
             $scope.plus = function() {
-                console.log("...... before " + $scope.alpha);
-                
-                console.log("...... plus() " + $scope.alpha);
+                $scope.alpha = parseInt($scope.alpha, 10) +1;
+                console.log("........ " + $scope.alpha);
             };
+            $scope.grow = function() {
+                $scope.beta = parseInt($scope.beta, 10) +1;
+                console.log("-------- " + $scope.beta);
+            };      
         }
     };
 });
