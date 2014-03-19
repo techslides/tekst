@@ -15,11 +15,11 @@ app.directive("error", function ($rootScope) {
 //<donut-chart>
 app.directive('donutChart', function() {
     return {
+        restrict: 'E',
         scope: { 'data': '=', 'onClick': '&', width: '=', height: '=' },
         controller: function($scope) { 
             $scope.width = util.defaultValue($scope.width, 240, 100); 
             $scope.height = util.defaultValue($scope.height, 240, 100); },
-        restrict: 'E',
         link: function(scope, element, attr) {
             var pie = new PieChart(element, scope.data, scope.width, scope.height);
             pie.onClick = function() {
@@ -32,42 +32,25 @@ app.directive('donutChart', function() {
     };
 });
 
-//<dna-report>
-app.directive('dnaReport', function() {
-    return {
-        scope: { 'data': '=', 'onClick': '&', width: '&', height: '&' },
-        restrict: 'E',
-        controller: function($scope) {
-           $scope.width = util.defaultValue($scope.width, 400, 100); 
-           $scope.height = util.defaultValue($scope.height, 400, 100); },
-
-        link: function(scope, element, attr) {
-            var report = new DnaReport(element, scope.data, scope.width, scope.height);
-            pie.onClick = function() {
-                scope.$apply(function(){
-                    if(scope.onClick) scope.onClick();
-                });
-            };
-            scope.$watchCollection('data', pie.updateData);
-        }
-    };
-});
-
-function DnaReport(element, data, width, height) {
-
-}
-
-
-app.directive('flowChart', function() {
+//<infography101 attrs=[alpha, beta] />
+app.directive('infography101', function() {
     return {
         restrict: 'E',
-        templateUrl: "/html/flowchart_svg.tpl",
+        templateUrl: "/html/infography101.svg",
         replace: true,
         scope: {
-            chart: "=chart",
+            alpha: '@', beta: '@'
         },
-
-        controller: 'FlowChartController',
+        controller: function($scope) {
+            $scope.plus = function() {
+                $scope.alpha = parseInt($scope.alpha, 10) +1;
+                console.log("........ " + $scope.alpha);
+            };
+            $scope.grow = function() {
+                $scope.beta = parseInt($scope.beta, 10) +1;
+                console.log("-------- " + $scope.beta);
+            };      
+        }
     };
 });
 

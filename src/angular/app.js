@@ -12,6 +12,7 @@ app.config(function($routeProvider) {
         .when('/gamma', { controller:"GammaCtrl", templateUrl:"/html/choropleth.tpl" })  
         .when('/zeta', { controller:"ZetaCtrl", templateUrl:"/html/dataviz.tpl" })  
         .when('/seq', { controller:"SeqCtrl", templateUrl:"/html/seq.tpl" })  
+        .when('/infography', { controller:"InfographyCtrl", templateUrl:"/html/infography.tpl" })  
         .when('/error', { controller:"DeltaCtrl", templateUrl:"error_tpl", 
             resolve: {
                 makeError: deltaCtrl.makeError,
