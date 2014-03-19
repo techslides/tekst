@@ -4,9 +4,11 @@
          </p>
          
          <div class="container">
-             <infography101 alpha="49" beta="100"></infography101>
+             <infography101 alpha="47" beta="90"></infography101>
          </div>
-
+         <div class="container">
+            <button id="align" class="btn btn-info pull-left" ng-click="plus()"><i class="icon-white icon-refresh"></i>Add +1</button>
+         </div>
 <!--
          <h3>{{message}}</h3>
          <p>{{output}}</p>
