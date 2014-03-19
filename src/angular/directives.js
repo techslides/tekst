@@ -32,11 +32,10 @@ app.directive('donutChart', function() {
     };
 });
 
-//<infography101>
+//<infography101 attrs=[alpha, beta] />
 app.directive('infography101', function() {
     return {
         restrict: 'E',
-        transclude: false,
         templateUrl: "/html/infography101.svg",
         replace: true,
         scope: {

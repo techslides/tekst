@@ -4,7 +4,7 @@
          </p>
          
          <div class="container">
-             <infography101 alpha="23" beta="48"></infography101>
+             <infography101 alpha="23" beta="48"/>
          </div>
 
 <!--
