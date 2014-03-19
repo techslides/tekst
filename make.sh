@@ -13,6 +13,7 @@ cat src/angular/ctrl_delta.js >> webapp/js/app.js
 cat src/angular/ctrl_seq.js >> webapp/js/app.js
 cat src/angular/ctrl_gamma.js >> webapp/js/app.js
 cat src/angular/ctrl_zeta.js >> webapp/js/app.js
+cat src/angular/ctrl_infography.js >> webapp/js/app.js
 cat src/angular/directives.js >> webapp/js/app.js
 cat src/angular/filters.js >> webapp/js/app.js
 cat src/angular/services.js >> webapp/js/app.js

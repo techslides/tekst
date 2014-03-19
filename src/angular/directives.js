@@ -44,7 +44,7 @@ app.directive('dnaReport', function() {
         link: function(scope, element, attr) {
             var report = new DnaReport(element, scope.data, scope.width, scope.height);
             pie.onClick = function() {
-                scope.$apply(function(){
+                scope.$apply(function() {
                     if(scope.onClick) scope.onClick();
                 });
             };
@@ -57,17 +57,14 @@ function DnaReport(element, data, width, height) {
 
 }
 
-
-app.directive('flowChart', function() {
+app.directive('infography101', function() {
     return {
         restrict: 'E',
-        templateUrl: "/html/flowchart_svg.tpl",
+        templateUrl: "/html/infography101.svg",
         replace: true,
         scope: {
-            chart: "=chart",
+            'alpha': '=', 'beta': '='
         },
-
-        controller: 'FlowChartController',
     };
 });
 

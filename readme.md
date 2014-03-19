@@ -1,5 +1,5 @@
-Tekst
------
+# Tekst
+
 A webservice that has a Angular/Javascript frontend that communicates through ajax calls to the Go backend that will respond with JSON responses.
 
 The services runs on the default :8000 port.
@@ -11,22 +11,25 @@ The services runs on the default :8000 port.
 Stack
 * Twitter Bootstrap
 * AngularJS
+* D3JS
 * Go Lang
-* Ruby on Rails
+* Ruby
 
-Install and Execute
--------------------
+## Install and Execute
 * [Install Go Lang](https://github.com/kyledinh/toolkit/wiki/Go)
 * Get source `git clone https://github.com/kyledinh/tekst.git`
-* Build from source `cd tekst; go build`
-* Run webserver `./tekst`
+* Build from source `cd tekst/webapp; go build`
+* Run webserver `./webapp`
 * Point browser to localhost:8000/ 
 
-You may need to set the REST_SERVER_URL variable in js/app.js to your url.
+## Build
+The `make.sh` script will concat all the various js script to `app.js`
+
 ```
-var REST_SERVER_URL = "http://localhost:8000/rest";
-var GAME_SERVER_URL = "http://localhost:8000/game";
-var ROR_SERVER_URL  = "http://localhost:3000/api/rest/sort";
+./make.sh 
+./make.sh dev   // sets the REST URL to localhost
+cd webapp
+go build
 ```
 
 Launch the Go Server and the Ruby On Rails Server
@@ -35,29 +38,25 @@ cd ~/toolkit/ruby/rubysort; rails server > /home/kyle/ror.log &
 cd ~/tekst; ./tekst > /home/kyle/tekst.log &
 ```
 
-Request json payload format
--------------------
+## Request json payload format
 ```
 { "action":"SELECTION", "data":["This", "is", "an", "example", "string", "to", "sort."] }
 ```
 
-Response json format
---------------------
+## Response json format
 ```
 { "status":"success", "message":"30ms : 6 elements", "data": ["This","an", "example",
      "is", "sort", "string"] }
 ```
 
-Action to Sort Mapping
-----------------------
+## Action to Sort Mapping
 * "SELECTION" SelectionSort
 * "INSERTION" InsertionSort
 * "NATIVE" Language supplied sort
 * "QUICK" QuickSort
 * "MERGE" MergeSort
 
-Testing
--------
+## Testing
 Go code unit test
 ```
 cd code/tekst
@@ -81,23 +80,20 @@ cd test/selenium/
 go test
 ```
 
-Curl
------------
+## Curl
 ```
 curl -X POST -d "{\"action\" : \"SELECTION\", \"data\" : [\"This is a string to sort.\" ]}" 
       http://localhost:8000/rest
 ```
 
-Dev Notes
----------
+## Dev Notes
 Build and run
 ```
 go build;
 ./tekst
 ```
 
-License
--------
+## License
 Copyright 2013 Kyle Dinh
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
