@@ -25,6 +25,10 @@ module.exports = function(grunt) {
       }
     }, 
 
+    karma: {
+      unit: { configFile: 'test/karma.conf.js' } 
+    },
+
     protractor: {
       options: {
         keepAlive: true,
@@ -54,16 +58,10 @@ module.exports = function(grunt) {
 
   // Load JSHint task
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-protractor-runner');
-  grunt.loadNpmTasks('grunt-protractor-webdriver');
   // Default task.
   grunt.registerTask('default', 'jshint');
   grunt.registerTask('e2e', ['protractor:run']);
-  grunt.registerTask('test', [
-    'concurrent:test',
-    'autoprefixer',
-    'connect:test',
-    'karma',
-    'protractor:run'
-  ]);
+  grunt.registerTask('unit', ['karma']);
 };
