@@ -8,4 +8,5 @@
 .idea
 og.*
 
+node_modules/*
 build/
