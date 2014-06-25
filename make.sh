@@ -25,3 +25,5 @@ if [ "$1" == "dev" ]; then
    cat src/javascript/dev.js >> webapp/js/app.js
    echo "!!! USING DEV ENVIRONMENTS !!!!!!! "
 fi
+
+go test -v ./...
