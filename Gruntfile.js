@@ -54,6 +54,13 @@ module.exports = function(grunt) {
           'src/javascript/mindsweep.js',
           'src/javascript/Work.js'          
         ]
+      },
+      dev: {
+        dest: 'webapp/js/app.js',
+        src: [
+          'webapp/js/app.js',
+          'src/javascript/dev.js'
+        ]
       }
     }, 
 
@@ -145,9 +152,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-protractor-runner');
   grunt.loadNpmTasks('grunt-shell');
   // Default task.
-  grunt.registerTask('default', ['goapp','unit']);
+  grunt.registerTask('default', ['build','unit']);
   grunt.registerTask('e2e', ['protractor:run']);
   grunt.registerTask('unit', ['karma']);
   grunt.registerTask('files', ['concat:alpha', 'concat:beta']);
-  grunt.registerTask('goapp', ['files','shell:gotest', 'go:build:myapp', 'shell:run']);
+  grunt.registerTask('build', ['files', 'concat:dev', 'shell:gotest', 'go:build:myapp']);  
+  grunt.registerTask('test', ['build', 'e2e', 'unit']);
+  grunt.registerTask('run', ['build', 'shell:run']);
 };

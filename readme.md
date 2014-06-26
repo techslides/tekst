@@ -27,7 +27,9 @@ This project has moved use Grunt to test, compile and build. Then point your bro
 * Then build and run
 ```
 npm intstall
-grunt 
+grunt
+grunt test
+grunt run 
 ``` 
 
 ### Without Grunt/NodeJS
