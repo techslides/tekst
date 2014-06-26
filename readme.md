@@ -23,13 +23,10 @@ Stack
 * Point browser to localhost:8000/ 
 
 ## Build
-The `make.sh` script will concat all the various js script to `app.js`
+This project has moved use Grunt to test, compile and build.
 
 ```
-./make.sh 
-./make.sh dev   // sets the REST URL to localhost
-cd webapp
-go build
+grunt 
 ```
 
 Launch the Go Server and the Ruby On Rails Server

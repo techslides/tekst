@@ -15,7 +15,7 @@ app.config(function($routeProvider) {
         .when('/infography', { controller:"InfographyCtrl", templateUrl:"/html/infography.tpl" })  
         .when('/error', { controller:"DeltaCtrl", templateUrl:"error_tpl", 
             resolve: {
-                makeError: deltaCtrl.makeError,
+                makeError: DeltaCtrl.makeError,
             } 
         }).otherwise( { template: "404 Not Found!" } );
 });
@@ -38,7 +38,7 @@ var util = {};
 
 util.defaultValue = function defaultValue(arg, val, min) {
     // Util for making directives attrs optional with a default
-    if ((arg == undefined) || (arg === null) || (isNaN(arg))) { return val; } 
+    if ((arg === undefined) || (arg === null) || (isNaN(arg))) { return val; } 
     if (arg <= min) { return val; }
     return arg;
 };

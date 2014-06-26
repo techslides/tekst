@@ -26,6 +26,35 @@ module.exports = function(grunt) {
       }
     }, 
 
+    uglify: {
+      options: {
+        sourceMap: true,
+        mangle: false,
+        sourceMapName: function (filePath) {
+          return filePath + '.map';
+        }
+      },
+      layout: {
+        files: {
+          'webapp/js/app.js': [
+            'src/angular/ctrl_alpha.js',
+            'src/angular/ctrl_beta.js',
+            'src/angular/ctrl_delta.js',
+            'src/angular/ctrl_seq.js',
+            'src/angular/ctrl_gamma.js',
+            'src/angular/ctrl_zeta.js',
+            'src/angular/ctrl_infography.js',
+            'src/angular/directives.js',
+            'src/angular/filters.js',
+            'src/angular/services.js',
+            'src/javascript/algorithms.js',
+            'src/javascript/mindsweep.js',
+            'src/javascript/Work.js'
+          ]
+        }
+      }
+    },
+
     go: {
       myapp: {
         root: 'webapp', 
@@ -52,25 +81,37 @@ module.exports = function(grunt) {
 
     shell: {
       gotest: {
-        command: 'go test ./...'
+        command: [
+          'go test ./...',
+          'echo "hello"'
+        ].join('&&')
+      },
+      run: {
+        command: './tekst',
+        options: {
+          execOptions: {
+            cwd: 'webapp'
+          }
+        }
       }
     },
 
     watch: {
       files: '<%= jshint.src %>',
-      tasks: ['jshint']
+      tasks: ['jshint', 'karma']
     }
   });
 
   // Load JSHint task
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-uglify');  
   grunt.loadNpmTasks('grunt-go');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-protractor-runner');
   grunt.loadNpmTasks('grunt-shell');
   // Default task.
-  grunt.registerTask('default', 'jshint');
+  grunt.registerTask('default', ['goapp','unit']);
   grunt.registerTask('e2e', ['protractor:run']);
   grunt.registerTask('unit', ['karma']);
-  grunt.registerTask('goo', ['shell:gotest', 'go:build:myapp']);
+  grunt.registerTask('goapp', ['uglify','shell:gotest', 'go:build:myapp', 'shell:run']);
 };
