@@ -15,7 +15,7 @@ app.config(function($routeProvider) {
         .when('/infography', { controller:"InfographyCtrl", templateUrl:"/html/infography.tpl" })  
         .when('/error', { controller:"DeltaCtrl", templateUrl:"error_tpl", 
             resolve: {
-                makeError: DeltaCtrl.makeError,
+                makeError: deltaCtrl.makeError,
             } 
         }).otherwise( { template: "404 Not Found!" } );
 });
