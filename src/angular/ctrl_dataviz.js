@@ -1,5 +1,5 @@
-/* ctrl_delta.js ------vv-------------- */
-app.controller('ZetaCtrl', function($scope){
+/* ctrl_dataviz.js ------vv-------------- */
+app.controller('DatavizCtrl', function($scope){
     // controller "knows" nothing about donut charts
     $scope.shared = { data: [ 10, 20, 30, 40 ] };
     $scope.chartClicked = function() {
@@ -14,5 +14,5 @@ app.controller('ZetaCtrl', function($scope){
     };
 });
 
-/* // ctrl_zeta.js ---^^-------------- */
+/* // ctrl_dataviz.js ---^^-------------- */
 

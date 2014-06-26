@@ -26,18 +26,20 @@ module.exports = function(grunt) {
       }
     }, 
 
+    clean: ['build/*', 'webapp/js/*'],
+
     concat: {
       options: { separator: ';' },
       alpha: {
         dest: 'build/_alpha.js', 
         src: [
           'src/angular/app.js',
-          'src/angular/ctrl_alpha.js',
+          'src/angular/ctrl_sort.js',
           'src/angular/ctrl_beta.js',
-          'src/angular/ctrl_delta.js',
+          'src/angular/ctrl_mindsweep.js',
           'src/angular/ctrl_seq.js',
-          'src/angular/ctrl_gamma.js',
-          'src/angular/ctrl_zeta.js',
+          'src/angular/ctrl_choropleth.js',
+          'src/angular/ctrl_dataviz.js',
         ]
       }, 
       beta: {
@@ -50,8 +52,9 @@ module.exports = function(grunt) {
           'src/angular/services.js',
           'src/javascript/algorithms.js',
           'src/javascript/mindsweep.js',
+          'src/javascript/Work.js'          
         ]
-       }
+      }
     }, 
 
     uglify: {
@@ -67,12 +70,12 @@ module.exports = function(grunt) {
         files: {
           'webapp/js/app.js': [
             'src/angular/app.js',
-            'src/angular/ctrl_alpha.js',
+            'src/angular/ctrl_sort.js',
             'src/angular/ctrl_beta.js',
-            'src/angular/ctrl_delta.js',
+            'src/angular/ctrl_mindsweep.js',
             'src/angular/ctrl_seq.js',
-            'src/angular/ctrl_gamma.js',
-            'src/angular/ctrl_zeta.js',
+            'src/angular/ctrl_choropleth.js',
+            'src/angular/ctrl_dataviz.js',
             'src/angular/ctrl_infography.js',
             'src/angular/directives.js',
             'src/angular/filters.js',
@@ -117,10 +120,7 @@ module.exports = function(grunt) {
         ].join('&&')
       },
       run: {
-        command: [
-          './tekst',
-          'echo "tekst app is running on localhost:8000"'
-        ].join('&&'),  
+        command: './tekst',  
         options: {
           execOptions: {
             cwd: 'webapp'
@@ -136,6 +136,7 @@ module.exports = function(grunt) {
   });
 
   // Load JSHint task
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');  
@@ -147,6 +148,6 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['goapp','unit']);
   grunt.registerTask('e2e', ['protractor:run']);
   grunt.registerTask('unit', ['karma']);
-  grunt.registerTask('appjs', ['concat:alpha', 'concat:beta']);
-  grunt.registerTask('goapp', ['appjs','shell:gotest', 'go:build:myapp', 'shell:run']);
+  grunt.registerTask('files', ['concat:alpha', 'concat:beta']);
+  grunt.registerTask('goapp', ['files','shell:gotest', 'go:build:myapp', 'shell:run']);
 };

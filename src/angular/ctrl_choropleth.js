@@ -1,6 +1,6 @@
 
-/* ctrl_gamma.js ------vv-------------- */
-function GammaCtrl($scope) {
+/* ctrl_choropleth.js ------vv-------------- */
+function ChoroplethCtrl($scope) {
     var fig1 = { id: "fig1", w: 960, h: 500, rateById: d3.map(), path: d3.geo.path(),
                  quantize: null, svg: null };
 
@@ -80,5 +80,5 @@ function GammaCtrl($scope) {
         console.log("push len : " + $scope.binh.length);
     };
 }
-/* // ctrl_gamma.js ---^^-------------- */
+/* // ctrl_choropleth.js ---^^-------------- */
 

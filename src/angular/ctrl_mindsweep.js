@@ -1,5 +1,5 @@
-/* ctrl_delta.js ------vv-------------- */
-var deltaCtrl = app.controller("DeltaCtrl", function ($scope, $http) {
+/* ctrl_mindsweep.js ------vv-------------- */
+var mindsweepCtrl = app.controller("MindsweepCtrl", function ($scope, $http) {
     $scope.toggleAccordion = bootstrap.toggleAccordion; 
     $scope.result = "OUTPUT";
     $scope.game = new Game(12,12);
@@ -45,7 +45,7 @@ var deltaCtrl = app.controller("DeltaCtrl", function ($scope, $http) {
     };    
 });
 
-deltaCtrl.loadData = function ($q, $timeout) {
+mindsweepCtrl.loadData = function ($q, $timeout) {
     var defer = $q.defer();
     $timeout(function () {
         defer.resolve();
@@ -54,7 +54,7 @@ deltaCtrl.loadData = function ($q, $timeout) {
     return defer.promise;
 };
 
-deltaCtrl.makeError = function ($q, $timeout) {
+mindsweepCtrl.makeError = function ($q, $timeout) {
     var defer = $q.defer();
     $timeout(function () {
         defer.reject();
@@ -62,5 +62,5 @@ deltaCtrl.makeError = function ($q, $timeout) {
     return defer.promise;
 };
    
-/* // ctrl_delta.js ---^^-------------- */
+/* // ctrl_mindsweep.js ---^^-------------- */
 

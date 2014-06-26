@@ -1,5 +1,5 @@
-/* ctrl_alpha.js ------vv-------------- */
-function AlphaCtrl($scope, $http, DataService) {
+/* ctrl_sort.js ------vv-------------- */
+function SortCtrl($scope, $http, DataService) {
     $scope.data = DataService;
 
     $scope.goSort = function(act) { 
@@ -71,5 +71,5 @@ function AlphaCtrl($scope, $http, DataService) {
     };        
 }
     
-/* // ctrl_alpha.js ---^^-------------- */
+/* // ctrl_sort.js ---^^-------------- */
 

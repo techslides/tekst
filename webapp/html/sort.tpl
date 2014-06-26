@@ -18,7 +18,7 @@
                   <td>
                   <h4>Sort Criteria</h4>
                   <div class="pull-left">
-                  <form name="myForm" ng-controller="AlphaCtrl">
+                  <form name="myForm" ng-controller="SortCtrl">
                      <label class="radio">
                         <input type="radio" ng-model="data.criteria" name="criteria" value="WORD">
                         By words

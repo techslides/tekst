@@ -15,19 +15,27 @@ Stack
 * Go Lang
 * Ruby
 
-## Install and Execute
+
+## Install with NodeJS/Grunt
+This project has moved use Grunt to test, compile and build. Then point your browser to `localhost:8000`.
+
 * [Install Go Lang](https://github.com/kyledinh/toolkit/wiki/Go)
 * Get source `git clone https://github.com/kyledinh/tekst.git`
+* Install Node
+* Install NPM (node package manager)
+* Install Grunt
+* Then build and run
+```
+npm intstall
+grunt 
+``` 
+
+### Without Grunt/NodeJS
+* ./make.sh
 * Build from source `cd tekst/webapp; go build`
-* Run webserver `./webapp`
+* Run webserver `./tekst`
 * Point browser to localhost:8000/ 
 
-## Build
-This project has moved use Grunt to test, compile and build.
-
-```
-grunt 
-```
 
 Launch the Go Server and the Ruby On Rails Server
 ```
@@ -56,25 +64,7 @@ cd ~/tekst; ./tekst > /home/kyle/tekst.log &
 ## Testing
 Go code unit test
 ```
-cd code/tekst
-go test -v
-```
-
-Karma unit test; see the karma/karma.conf.js for configuration
-```
-./karma/test.sh 
-```
-
-Functional Selenium test - [wiki](https://github.com/kyledinh/toolkit/wiki/Selenium-Testing)  
-Run the selenium-standalone in [toolkit/selenium](https://github.com/kyledinh/toolkit/tree/master/selenium)
-```
-java -jar selenium-server-standalone-2.35.0.jar
-```
-
-Then run the test
-```
-cd test/selenium/
-go test
+go test ./...
 ```
 
 ## Curl

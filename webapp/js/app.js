@@ -6,16 +6,16 @@ var app = angular.module("app", ['ui.bootstrap']);
 
 app.config(function($routeProvider) {
     $routeProvider.when('/', { controller:"AppCtrl", templateUrl:"app_tpl" })      
-        .when('/alpha', { controller:"AlphaCtrl", templateUrl:"/html/sort.tpl" })      
+        .when('/sort', { controller:"SortCtrl", templateUrl:"/html/sort.tpl" })      
         .when('/beta',  { controller:"BetaCtrl",  templateUrl:"/html/bootstrap.tpl" })      
-        .when('/delta', { controller:"DeltaCtrl", templateUrl:"/html/mindsweep.tpl" })     
-        .when('/gamma', { controller:"GammaCtrl", templateUrl:"/html/choropleth.tpl" })  
-        .when('/zeta', { controller:"ZetaCtrl", templateUrl:"/html/dataviz.tpl" })  
+        .when('/mindsweep', { controller:"MindsweepCtrl", templateUrl:"/html/mindsweep.tpl" })     
+        .when('/choropleth', { controller:"ChoroplethCtrl", templateUrl:"/html/choropleth.tpl" })  
+        .when('/dataviz', { controller:"DatavizCtrl", templateUrl:"/html/dataviz.tpl" })  
         .when('/seq', { controller:"SeqCtrl", templateUrl:"/html/seq.tpl" })  
         .when('/infography', { controller:"InfographyCtrl", templateUrl:"/html/infography.tpl" })  
-        .when('/error', { controller:"DeltaCtrl", templateUrl:"error_tpl", 
+        .when('/error', { controller:"MindsweepCtrl", templateUrl:"error_tpl", 
             resolve: {
-                makeError: deltaCtrl.makeError,
+                makeError: mindsweepCtrl.makeError,
             } 
         }).otherwise( { template: "404 Not Found!" } );
 });
@@ -72,8 +72,8 @@ bootstrap.closeModal = function(id) {
 };
 
 
-;/* ctrl_alpha.js ------vv-------------- */
-function AlphaCtrl($scope, $http, DataService) {
+;/* ctrl_sort.js ------vv-------------- */
+function SortCtrl($scope, $http, DataService) {
     $scope.data = DataService;
 
     $scope.goSort = function(act) { 
@@ -145,7 +145,7 @@ function AlphaCtrl($scope, $http, DataService) {
     };        
 }
     
-/* // ctrl_alpha.js ---^^-------------- */
+/* // ctrl_sort.js ---^^-------------- */
 
 ;/* ctrl_beta.js ------vv-------------- */
 function BetaCtrl($scope, DataService) {
@@ -161,8 +161,8 @@ function BetaCtrl($scope, DataService) {
    
 /* // ctrl_beta.js ---^^-------------- */
 
-;/* ctrl_delta.js ------vv-------------- */
-var deltaCtrl = app.controller("DeltaCtrl", function ($scope, $http) {
+;/* ctrl_mindsweep.js ------vv-------------- */
+var mindsweepCtrl = app.controller("MindsweepCtrl", function ($scope, $http) {
     $scope.toggleAccordion = bootstrap.toggleAccordion; 
     $scope.result = "OUTPUT";
     $scope.game = new Game(12,12);
@@ -208,7 +208,7 @@ var deltaCtrl = app.controller("DeltaCtrl", function ($scope, $http) {
     };    
 });
 
-deltaCtrl.loadData = function ($q, $timeout) {
+mindsweepCtrl.loadData = function ($q, $timeout) {
     var defer = $q.defer();
     $timeout(function () {
         defer.resolve();
@@ -217,7 +217,7 @@ deltaCtrl.loadData = function ($q, $timeout) {
     return defer.promise;
 };
 
-deltaCtrl.makeError = function ($q, $timeout) {
+mindsweepCtrl.makeError = function ($q, $timeout) {
     var defer = $q.defer();
     $timeout(function () {
         defer.reject();
@@ -225,7 +225,7 @@ deltaCtrl.makeError = function ($q, $timeout) {
     return defer.promise;
 };
    
-/* // ctrl_delta.js ---^^-------------- */
+/* // ctrl_mindsweep.js ---^^-------------- */
 
 ;/* ctrl_seq.js ------vv-------------- */
 var seqCtrl = app.controller("SeqCtrl", function SeqCtrl($scope) {
@@ -266,8 +266,8 @@ var seqCtrl = app.controller("SeqCtrl", function SeqCtrl($scope) {
 /* // ctrl_seq.js ---^^-------------- */
 
 ;
-/* ctrl_gamma.js ------vv-------------- */
-function GammaCtrl($scope) {
+/* ctrl_choropleth.js ------vv-------------- */
+function ChoroplethCtrl($scope) {
     var fig1 = { id: "fig1", w: 960, h: 500, rateById: d3.map(), path: d3.geo.path(),
                  quantize: null, svg: null };
 
@@ -347,10 +347,10 @@ function GammaCtrl($scope) {
         console.log("push len : " + $scope.binh.length);
     };
 }
-/* // ctrl_gamma.js ---^^-------------- */
+/* // ctrl_choropleth.js ---^^-------------- */
 
-;/* ctrl_delta.js ------vv-------------- */
-app.controller('ZetaCtrl', function($scope){
+;/* ctrl_dataviz.js ------vv-------------- */
+app.controller('DatavizCtrl', function($scope){
     // controller "knows" nothing about donut charts
     $scope.shared = { data: [ 10, 20, 30, 40 ] };
     $scope.chartClicked = function() {
@@ -365,7 +365,7 @@ app.controller('ZetaCtrl', function($scope){
     };
 });
 
-/* // ctrl_zeta.js ---^^-------------- */
+/* // ctrl_dataviz.js ---^^-------------- */
 
 ;/* ctrl_infography.js ------vv-------------- */
 var infographyCtrl = app.controller("InfographyCtrl", function InfographyCtrl($scope) {
@@ -935,3 +935,93 @@ function shuffleArray(array) {
     return array;
 }
 
+;/* src/javascript/Work.js */
+
+/*
+ * Written by Kyle Dinh, 2014. 
+ */
+(function () { 
+
+    function Work(controlStr, sampleStr, wordLength) {
+        this.name = "";
+        this.control = controlStr || " ";
+        this.sampler = sampleStr || " ";
+        this.word = wordLength || 6;
+        this.curPointer = 0;    
+        this.len = this.control.length;
+        this.mutations = [];
+        this.DEBUG = false;
+    }
+
+    Work.prototype.debug = function (msg) {
+        if (this.DEBUG) { console.log(msg); }
+    };
+
+    Work.prototype.incPointer = function (i) {
+        var n = i || 1;
+        this.curPointer += n;
+    };
+
+    Work.prototype.alter = function (pos) {
+        if ((pos + 2) > this.len) { return "MUTATION"; } 
+        if (this.control[pos+1] === this.sampler[pos]) { return "BLANK"; }
+        return "MUTATION";
+    };
+
+    // Simple algorithm for now, needs more work 
+    Work.prototype.align  = function () {
+        for (var i = 0; this.curPointer < this.len; i++) {
+            if (this.control[i] === this.sampler[i]) {
+                this.debug(i + " " + this.control[i] + " - " + this.sampler[i]);
+            }
+            if (this.control[i] !== this.sampler[i]) {
+                var action = this.alter(i); 
+                if (action === "BLANK") { this.insert(i, " "); }
+                var mutation = {}; 
+                mutation[i] = action;
+                this.mutations.push(mutation);
+                this.debug(action + " " + this.control[i] + " : " + this.sampler[i]);
+            }
+            this.curPointer++;
+        } 
+    };
+
+    Work.prototype.insert = function (pos, str) {
+        var place = str || " ";
+        var head = "" + this.sampler.slice(0, pos);
+        var tail = "" + this.sampler.slice(pos, this.sampler.length); 
+        this.sampler = head + place + tail;
+    };
+
+    Work.prototype.printAtIndex = function (i) {
+        this.printPair(this.control[i], this.sampler[i]);
+    };
+
+    Work.prototype.printPair = function (x, y) {
+        var str = "";
+        if (typeof y === 'undefined') { str = x + " - ."; }
+        if (x === y) { str = x + " - " + y; }
+        if (x !== y) { str = x + " * " + y; }
+        if (y === " ") { str = x + " *  "; }
+        console.log(str);
+    };
+
+    Work.prototype.report = function () {
+        var obj = {
+	   name: this.name,
+           length: this.len,
+           mutations: this.mutations
+        };
+        return JSON.stringify(obj);
+    }
+
+    // Nodejs export
+    if (typeof exports !== 'undefined') {
+        exports.Work = Work;
+    } else {
+        this.Work = Work;  
+    }
+
+})();
+
+/* Work.js built Tue Mar  4 05:18:52 PST 2014 -- kyledinh */ 

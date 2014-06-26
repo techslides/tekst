@@ -6,16 +6,16 @@ var app = angular.module("app", ['ui.bootstrap']);
 
 app.config(function($routeProvider) {
     $routeProvider.when('/', { controller:"AppCtrl", templateUrl:"app_tpl" })      
-        .when('/alpha', { controller:"AlphaCtrl", templateUrl:"/html/sort.tpl" })      
+        .when('/sort', { controller:"SortCtrl", templateUrl:"/html/sort.tpl" })      
         .when('/beta',  { controller:"BetaCtrl",  templateUrl:"/html/bootstrap.tpl" })      
-        .when('/delta', { controller:"DeltaCtrl", templateUrl:"/html/mindsweep.tpl" })     
-        .when('/gamma', { controller:"GammaCtrl", templateUrl:"/html/choropleth.tpl" })  
-        .when('/zeta', { controller:"ZetaCtrl", templateUrl:"/html/dataviz.tpl" })  
+        .when('/mindsweep', { controller:"MindsweepCtrl", templateUrl:"/html/mindsweep.tpl" })     
+        .when('/choropleth', { controller:"ChoroplethCtrl", templateUrl:"/html/choropleth.tpl" })  
+        .when('/dataviz', { controller:"DatavizCtrl", templateUrl:"/html/dataviz.tpl" })  
         .when('/seq', { controller:"SeqCtrl", templateUrl:"/html/seq.tpl" })  
         .when('/infography', { controller:"InfographyCtrl", templateUrl:"/html/infography.tpl" })  
-        .when('/error', { controller:"DeltaCtrl", templateUrl:"error_tpl", 
+        .when('/error', { controller:"MindsweepCtrl", templateUrl:"error_tpl", 
             resolve: {
-                makeError: deltaCtrl.makeError,
+                makeError: mindsweepCtrl.makeError,
             } 
         }).otherwise( { template: "404 Not Found!" } );
 });
