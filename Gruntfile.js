@@ -1,5 +1,6 @@
 module.exports = function(grunt) {
   grunt.initConfig({
+    appName: 'tekst',
     jshint: {
       src: ['Gruntfile.js', 'src/angular/*.js', 'src/javascript/*.js'],
       options: {
@@ -25,6 +26,14 @@ module.exports = function(grunt) {
       }
     }, 
 
+    go: {
+      myapp: {
+        root: 'webapp', 
+        output: '<%= appName %>',
+        run_files: ['app.go']
+      }
+    },
+
     karma: {
       unit: { configFile: 'test/karma.conf.js' } 
     },
@@ -41,13 +50,10 @@ module.exports = function(grunt) {
       run: {}
     },
 
-    protractor_webdriver: {
-      protractor: {
-        options: {
-          path: 'node_module/protractor/bin/',
-          command: 'webdriver-manager start',
-        },
-      },
+    shell: {
+      gotest: {
+        command: 'go test ./...'
+      }
     },
 
     watch: {
@@ -58,10 +64,13 @@ module.exports = function(grunt) {
 
   // Load JSHint task
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-go');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-protractor-runner');
+  grunt.loadNpmTasks('grunt-shell');
   // Default task.
   grunt.registerTask('default', 'jshint');
   grunt.registerTask('e2e', ['protractor:run']);
   grunt.registerTask('unit', ['karma']);
+  grunt.registerTask('goo', ['shell:gotest', 'go:build:myapp']);
 };

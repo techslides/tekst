@@ -1,6 +1,8 @@
 'use strict';
 
 /* jasmine specs for controllers go here */
+console.log("=========== algorithms.js ===============");
+
 
 describe('Algorithms Sorting Functions', function() {
  

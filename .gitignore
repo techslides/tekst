@@ -8,5 +8,6 @@
 .idea
 og.*
 
+webapp/tekst
 node_modules/*
 build/
