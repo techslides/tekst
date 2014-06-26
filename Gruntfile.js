@@ -1,30 +1,6 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     appName: 'tekst',
-    jshint: {
-      src: ['Gruntfile.js', 'src/angular/*.js', 'src/javascript/*.js'],
-      options: {
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        boss: true,
-        eqnull: true,
-        browser: true,
-        globals: {
-          require: true,
-          define: true,
-          requirejs: true,
-          describe: true,
-          expect: true,
-          it: true
-        }
-      }
-    }, 
 
     clean: ['build/*', 'webapp/js/*'],
 
@@ -64,37 +40,6 @@ module.exports = function(grunt) {
       }
     }, 
 
-    uglify: {
-      options: {
-        sourceMap: true,
-        mangle: false,
-        beautify: true,
-        sourceMapName: function (filePath) {
-          return filePath + '.map';
-        }
-      },
-      layout: {
-        files: {
-          'webapp/js/app.js': [
-            'src/angular/app.js',
-            'src/angular/ctrl_sort.js',
-            'src/angular/ctrl_beta.js',
-            'src/angular/ctrl_mindsweep.js',
-            'src/angular/ctrl_seq.js',
-            'src/angular/ctrl_choropleth.js',
-            'src/angular/ctrl_dataviz.js',
-            'src/angular/ctrl_infography.js',
-            'src/angular/directives.js',
-            'src/angular/filters.js',
-            'src/angular/services.js',
-            'src/javascript/algorithms.js',
-            'src/javascript/mindsweep.js',
-            'src/javascript/Work.js'
-          ]
-        }
-      }
-    },
-
     go: {
       myapp: {
         root: 'webapp', 
@@ -102,6 +47,31 @@ module.exports = function(grunt) {
         run_files: ['app.go']
       }
     },
+
+    jshint: {
+      src: ['Gruntfile.js', 'src/angular/*.js', 'src/javascript/*.js'],
+      options: {
+        curly: true,
+        eqeqeq: true,
+        immed: true,
+        latedef: true,
+        newcap: true,
+        noarg: true,
+        sub: true,
+        undef: true,
+        boss: true,
+        eqnull: true,
+        browser: true,
+        globals: {
+          require: true,
+          define: true,
+          requirejs: true,
+          describe: true,
+          expect: true,
+          it: true
+        }
+      }
+    }, 
 
     karma: {
       unit: { configFile: 'test/karma.conf.js' } 
@@ -132,6 +102,37 @@ module.exports = function(grunt) {
           execOptions: {
             cwd: 'webapp'
           }
+        }
+      }
+    },
+
+    uglify: {
+      options: {
+        sourceMap: true,
+        mangle: false,
+        beautify: true,
+        sourceMapName: function (filePath) {
+          return filePath + '.map';
+        }
+      },
+      layout: {
+        files: {
+          'webapp/js/app.js': [
+            'src/angular/app.js',
+            'src/angular/ctrl_sort.js',
+            'src/angular/ctrl_beta.js',
+            'src/angular/ctrl_mindsweep.js',
+            'src/angular/ctrl_seq.js',
+            'src/angular/ctrl_choropleth.js',
+            'src/angular/ctrl_dataviz.js',
+            'src/angular/ctrl_infography.js',
+            'src/angular/directives.js',
+            'src/angular/filters.js',
+            'src/angular/services.js',
+            'src/javascript/algorithms.js',
+            'src/javascript/mindsweep.js',
+            'src/javascript/Work.js'
+          ]
         }
       }
     },

@@ -13,7 +13,6 @@ exports.config = {
   // Active tests has a '-' dash in this format: 01-homepage.js
   // Inactive test can be left in diretory but remove the '##-' number prefix
   specs: [
-    //'e2e/*-*.js'
-    'e2e/*.js'
+    'e2e/*-*.js'
   ]
 };
